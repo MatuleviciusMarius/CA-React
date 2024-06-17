@@ -5,5 +5,5 @@
 }
 
 .container > div {
-  width: 50%;
+  flex: 1;
 }

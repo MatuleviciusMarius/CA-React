@@ -4,8 +4,7 @@ import styles from "./CodeEditor.module.css";
 
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/mode-css";
-import "ace-builds/src-noconflict/theme-monokai";
-import "ace-builds/src-noconflict/theme-dracula";
+import "ace-builds/src-noconflict/theme-chaos";
 import HtmlDisplay from "../HtmllDisplay/HtmlDisplay";
 
 const CodeEditor = () => {
@@ -20,8 +19,9 @@ const CodeEditor = () => {
       <div>
         <AceEditor
           width="100%"
+          height="100vh"
           mode="html"
-          theme="dracula"
+          theme="chaos"
           onChange={onChange}
           name="aceEditor"
           editorProps={{ $blockScrolling: true }}
