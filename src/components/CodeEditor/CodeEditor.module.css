@@ -1,0 +1,9 @@
+.container {
+  width: 100vw;
+  display: flex;
+  height: 100%;
+}
+
+.container > div {
+  width: 50%;
+}
