@@ -1,11 +1,9 @@
-import CodeEditor from "./components/CodeEditor/CodeEditor";
-import "./App.css";
+import "./App.scss";
+import Router from "./components/Router/Router";
 
 function App() {
   return (
-    <div>
-      <CodeEditor />
-    </div>
+    <Router />
   );
 }
 

@@ -1,4 +1,4 @@
-import styles from "./HtmlDisplay.module.css";
+import styles from "./HtmlDisplay.module.scss";
 
 type HtmlDisplayProps = {
   html: string;

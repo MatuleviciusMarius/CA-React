@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AceEditor from "react-ace";
-import styles from "./CodeEditor.module.css";
+import styles from "./CodeEditor.module.scss";
 
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/mode-css";
