@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import Input from "../../../Input/Input";
 import styles from "./LoginForm.module.scss";
+import Button from "../../../Button/Button";
 
 type FormData = {
   email: string;
@@ -20,9 +21,20 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <Input id="email" labelText="Username" type="email" {...register("email", { required: "Email is required" })} errorMessage={errors.email?.message} />
-      <Input id="password" labelText="Password" type="password" {...register("password", { required: "Password is required" })} />
-      <button type="submit">Login</button>
+      <Input
+        id="email"
+        labelText="Username"
+        type="email"
+        {...register("email", { required: "Email is required" })}
+        errorMessage={errors.email?.message}
+      />
+      <Input
+        id="password"
+        labelText="Password"
+        type="password"
+        {...register("password", { required: "Password is required" })}
+      />
+      <Button type="submit">Login</Button>
     </form>
   );
 }

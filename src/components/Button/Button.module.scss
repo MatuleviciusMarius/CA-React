@@ -1,0 +1,13 @@
+@import "../../styles/vars.scss";
+
+.button {
+  background-color: $color-primary;
+  color: $color-white;
+  border: none;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 50px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
