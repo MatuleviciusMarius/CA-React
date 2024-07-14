@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import styles from "./LoginForm.module.scss";
-import { Box, Button, Container, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 
 type FormData = {
   email: string;
@@ -16,15 +16,13 @@ export default function LoginForm() {
 
   return (
     <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
-      <Container maxWidth={"sm"}>
-        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-          <TextField label={"Email"} id="email" type="email" {...register("email", { required: "Email is required" })} />
-          <TextField label={"Password"} id="password" type="password" {...register("password", { required: "Password is required" })} />
-          <Button variant="contained" type="submit">
-            Login
-          </Button>
-        </form>
-      </Container>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+        <TextField size="small" label={"Email"} id="email" type="email" {...register("email", { required: "Email is required" })} />
+        <TextField size="small" label={"Password"} id="password" type="password" {...register("password", { required: "Password is required" })} />
+        <Button variant="contained" type="submit">
+          Login
+        </Button>
+      </form>
     </Box>
   );
 }
