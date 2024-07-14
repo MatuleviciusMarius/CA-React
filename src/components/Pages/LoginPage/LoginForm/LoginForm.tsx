@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
-import Input from "../../../Input/Input";
 import styles from "./LoginForm.module.scss";
-import Button from "../../../Button/Button";
+import { Box, Button, Container, TextField } from "@mui/material";
 
 type FormData = {
   email: string;
@@ -9,32 +8,23 @@ type FormData = {
 };
 
 export default function LoginForm() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>();
+  const { register, handleSubmit } = useForm<FormData>();
 
   function onSubmit(data: FormData) {
     console.log(data);
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <Input
-        id="email"
-        labelText="Username"
-        type="email"
-        {...register("email", { required: "Email is required" })}
-        errorMessage={errors.email?.message}
-      />
-      <Input
-        id="password"
-        labelText="Password"
-        type="password"
-        {...register("password", { required: "Password is required" })}
-      />
-      <Button type="submit">Login</Button>
-    </form>
+    <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
+      <Container maxWidth={"sm"}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+          <TextField label={"Email"} id="email" type="email" {...register("email", { required: "Email is required" })} />
+          <TextField label={"Password"} id="password" type="password" {...register("password", { required: "Password is required" })} />
+          <Button variant="contained" type="submit">
+            Login
+          </Button>
+        </form>
+      </Container>
+    </Box>
   );
 }
