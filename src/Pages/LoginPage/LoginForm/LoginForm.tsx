@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import styles from "./LoginForm.module.scss";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import LanguageSelectDropdown from "../../../components/LanguageSelectDropdown/LanguageSelectDropdown";
 
 type FormData = {
   email: string;
@@ -19,7 +20,7 @@ export default function LoginForm() {
 
   return (
     <Box display={"flex"} alignItems={"center"} justifyContent={"center"} flexDirection={"column"}>
-      <Typography variant="h4">{t("greetings.hello")}</Typography>
+      <LanguageSelectDropdown />
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <TextField
           size="small"
@@ -36,7 +37,7 @@ export default function LoginForm() {
           {...register("password", { required: "Password is required" })}
         />
         <Button variant="contained" type="submit">
-          Login
+          {t("login")}
         </Button>
       </form>
     </Box>

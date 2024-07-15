@@ -2,13 +2,15 @@ import { useEffect } from "react";
 import "./App.scss";
 import Router from "./Router/Router";
 import { useTranslation } from "react-i18next";
+import { supportedLanguages } from "../i18n";
 
 function App() {
   const { i18n } = useTranslation();
 
   useEffect(() => {
-    const lng = navigator.language;
-    i18n.changeLanguage(lng);
+    const browserLang = navigator.language.split("-")[0];
+    const isSupported = Object.values(supportedLanguages).includes(browserLang);
+    i18n.changeLanguage(isSupported ? browserLang : "en");
   }, [i18n]);
 
   return <Router />;
