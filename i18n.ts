@@ -13,10 +13,11 @@ const resources = {
     },
   },
 
-  fr: {
-    hello: "Bonjour",
+  lt: {
     translation: {
-      "Welcome to React": "Bienvenue à React et react-i18next",
+      greetings: {
+        hello: "Sveiki translation testas",
+      },
     },
   },
 };
