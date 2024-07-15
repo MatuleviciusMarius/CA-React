@@ -22,19 +22,13 @@ export default function LoginForm() {
     <Box display={"flex"} alignItems={"center"} justifyContent={"center"} flexDirection={"column"}>
       <LanguageSelectDropdown />
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+        <TextField size="small" label={t("email")} id="email" type="email" {...register("email")} />
         <TextField
           size="small"
-          label={"Email"}
-          id="email"
-          type="email"
-          {...register("email", { required: "Email is required" })}
-        />
-        <TextField
-          size="small"
-          label={"Password"}
+          label={t("password")}
           id="password"
           type="password"
-          {...register("password", { required: "Password is required" })}
+          {...register("password")}
         />
         <Button variant="contained" type="submit">
           {t("login")}
