@@ -12,6 +12,7 @@ export const supportedLanguages: { [key: string]: string } = {
 const resources = {
   en: {
     translation: {
+      courses: "Courses",
       password: "Password",
       email: "Email",
       login: "Login",
@@ -21,6 +22,7 @@ const resources = {
 
   lt: {
     translation: {
+      courses: "Kursai",
       password: "Slaptažodis",
       email: "El. paštas",
       login: "Prisijungti",

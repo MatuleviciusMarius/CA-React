@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import { RoutePaths } from "./routes.ts";
-import LoginPage from "../pages/login";
-import NotFoundPage from "../pages/notFound";
-import CoursesPage from "../pages/courses";
+import LoginPage from "../Pages/login/index.tsx";
+import CoursesPage from "../Pages/courses/index.tsx";
+import NotFoundPage from "../Pages/notFound/index.tsx";
 
 export default function Router() {
   return (
