@@ -1,5 +1,5 @@
 export class RoutePaths {
-  public static login = "/";
+  public static login = "/login";
   public static register = "/register";
   public static courses = "/courses";
   public static course = "/courses/:id";
