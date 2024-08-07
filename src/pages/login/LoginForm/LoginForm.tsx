@@ -42,7 +42,7 @@ export default function LoginForm() {
         <Button variant="contained" type="submit">
           {t("login")}
         </Button>
-        <Link href="#">Register</Link>
+        <Link href="register">Register</Link>
       </form>
     </Box>
   );

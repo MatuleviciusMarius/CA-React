@@ -1,10 +1,17 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-export const supportedLanguages: { [key: string]: string } = {
-  english: "en",
-  lithuanian: "lt",
+type SupportedLanguageKeys = keyof typeof supportedLanguages;
+
+export const supportedLanguages = {
+  en: "en",
+  lt: "lt",
 } as const;
+
+export const languagesTitle: Record<SupportedLanguageKeys, string> = {
+  en: "🇬🇧 en",
+  lt: "🇱🇹 lt",
+};
 
 // the translations
 // (tip move them in a JSON file and import them,
