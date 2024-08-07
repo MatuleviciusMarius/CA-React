@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import styles from "./LoginForm.module.scss";
+import styles from "./RegisterForm.module.scss";
 import { Box, Button, Link, TextField } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
