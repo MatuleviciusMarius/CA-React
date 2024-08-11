@@ -16,6 +16,7 @@ export default function LoginForm() {
   async function onSubmit(data: UserLogin) {
     const response = await login(data);
 
+    console.log(response.status);
     if (response.status === 200) {
       cookie.set("jwt_token", response.data.jwt_token);
       navigate("/");

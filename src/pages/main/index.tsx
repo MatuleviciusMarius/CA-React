@@ -31,7 +31,7 @@ export default function LoginPage() {
   return (
     <div className={styles.container}>
       <Header />
-      <LoginForm />
+      <div>mainnnnn</div>
     </div>
   );
 }
