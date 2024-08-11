@@ -1,20 +1,25 @@
 import { useForm } from "react-hook-form";
+import cookie from "js-cookie";
 import styles from "./LoginForm.module.scss";
 import { Box, Button, Link, TextField } from "@mui/material";
 import { useTranslation } from "react-i18next";
-
-type FormData = {
-  email: string;
-  password: string;
-};
+import { login } from "../../../api/login";
+import { UserLogin } from "../../../types/user";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
-  const { register, handleSubmit } = useForm<FormData>();
+  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm<UserLogin>();
 
   const { t } = useTranslation();
 
-  function onSubmit(data: FormData) {
-    console.log(data);
+  async function onSubmit(data: UserLogin) {
+    const response = await login(data);
+
+    if (response.status === 200) {
+      cookie.set("jwt_token", response.data.jwt_token);
+      navigate("/");
+    }
   }
 
   return (
@@ -30,7 +35,13 @@ export default function LoginForm() {
           label={t("email")}
           id="email"
           type="email"
-          {...register("email")}
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "Please enter a valid email address",
+            },
+          })}
         />
         <TextField
           size="medium"

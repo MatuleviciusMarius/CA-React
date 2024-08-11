@@ -18,3 +18,8 @@ export type UserRegistration = Omit<
   password: string;
   dateOfBirth: Date;
 };
+
+export type UserLogin = {
+  email: UserRegistration["email"];
+  password: UserRegistration["password"];
+};
