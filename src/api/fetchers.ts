@@ -6,7 +6,7 @@ const api = axios.create({
   baseURL: API_ENDPOINT,
 });
 
-export type CourseType = {
+export type CourseResponse = {
   id: string;
   title: string;
   description: string;
@@ -20,6 +20,6 @@ export type CourseType = {
 };
 
 export const getCourses = async () => {
-  const response = await api.get<CourseType[]>("/courses");
+  const response = await api.get<CourseResponse[]>("/courses");
   return response.data;
 };

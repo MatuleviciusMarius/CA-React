@@ -2,6 +2,9 @@ import { useForm } from "react-hook-form";
 import styles from "./RegisterForm.module.scss";
 import { Box, Button, Link, MenuItem, Select, TextField } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { registerUser } from "../../../api/register";
+import { UserRegistration } from "../../../types/user";
+import { useNavigate } from "react-router-dom";
 
 type FormData = {
   name: string;
@@ -17,18 +20,34 @@ type FormData = {
 
 const countries = [
   { code: "US", name: "United States" },
-  { code: "CA", name: "Canada" },
-  { code: "GB", name: "United Kingdom" },
-  // Add more countries as needed
+  { code: "LT", name: "Lithuania" },
+  { code: "GER", name: "Germany" },
 ];
 
 export default function LoginForm() {
+  const navigate = useNavigate();
+
   const { register, handleSubmit } = useForm<FormData>();
 
   const { t } = useTranslation();
 
-  function onSubmit(data: FormData) {
-    console.log(data);
+  async function onSubmit(data: FormData) {
+    const user: UserRegistration = {
+      name: data.name,
+      surname: data.surname,
+      email: data.email,
+      occupation: data.occupation,
+      country: data.country,
+      phoneNumber: data.phoneNumber,
+      password: data.password,
+      dateOfBirth: data.dateOfBirth,
+    };
+
+    const response = await registerUser(user);
+
+    if (response.status === 200) {
+      navigate("/");
+    }
   }
 
   return (
@@ -54,7 +73,13 @@ export default function LoginForm() {
           type="text"
           {...register("surname")}
         />
-        <Select id="country" {...register("country")} displayEmpty fullWidth>
+        <Select
+          id="country"
+          {...register("country")}
+          displayEmpty
+          fullWidth
+          defaultValue="US"
+        >
           <MenuItem value="" disabled>
             {t("select_country")}
           </MenuItem>
@@ -82,7 +107,13 @@ export default function LoginForm() {
           label={t("email")}
           id="email"
           type="email"
-          {...register("email")}
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "Please enter a valid email address",
+            },
+          })}
         />
         <TextField
           size="medium"
