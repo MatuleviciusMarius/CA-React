@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import cookie from "js-cookie";
 import styles from "./RegisterForm.module.scss";
 import { Box, Button, Link, MenuItem, Select, TextField } from "@mui/material";
 import { useTranslation } from "react-i18next";
@@ -46,6 +47,7 @@ export default function LoginForm() {
     const response = await registerUser(user);
 
     if (response.status === 200) {
+      cookie.set("jwt_token", response.data.jwt_token);
       navigate("/");
     }
   }

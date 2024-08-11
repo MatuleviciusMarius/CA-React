@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UserRegistration } from "../types/user";
+import { User, UserRegistration } from "../types/user";
 
 const API_PORT = "3002";
 const API_ENDPOINT = `http://localhost:${API_PORT}`;
@@ -10,10 +10,11 @@ const api = axios.create({
 
 export type RegisterResponse = {
   message: string;
-  jwtToken: string;
+  jwt_token: string;
+  user: User;
 };
 
 export const registerUser = async (user: UserRegistration) => {
-  const response = await api.post<RegisterResponse[]>("/users", user);
+  const response = await api.post<RegisterResponse>("/users", user);
   return response;
 };
