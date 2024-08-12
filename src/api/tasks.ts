@@ -13,14 +13,18 @@ export type TasksResponse = {
 };
 
 export const getTasks = async (courseId: string, jwt_token: string) => {
-  const response = await api.get<TasksResponse>(`/tasks/${courseId}`, {
+  const response = await api.get<TasksResponse>(`/tasks/course/${courseId}`, {
     headers: { authorization: jwt_token },
   });
   return response;
 };
 
+export type TaskResponse = {
+  task: Task;
+};
+
 export const getTaskById = async (id: string, jwt_token: string) => {
-  const response = await api.get<TasksResponse>(`/tasks/${id}`, {
+  const response = await api.get<TaskResponse>(`/tasks/${id}`, {
     headers: { authorization: jwt_token },
   });
   return response;

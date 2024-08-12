@@ -5,14 +5,13 @@ import cookie from "js-cookie";
 import { validateLogin } from "../../api/login";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { getTasks } from "../../api/tasks";
+import { getTaskById } from "../../api/tasks";
 import { Task } from "../../types/task";
-import TasksWrapper from "../../components/TasksWrapper/TasksWrapper";
 
 export default function LoginPage() {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [task, setTask] = useState<Task>();
   const navigate = useNavigate();
-  const { id: courseId } = useParams();
+  const { id } = useParams();
 
   const validateUser = async (jwt_token: string) => {
     const response = await validateLogin(jwt_token);
@@ -23,9 +22,9 @@ export default function LoginPage() {
     }
   };
 
-  const retrieveTasks = async (courseId: string, jwt_token: string) => {
-    const fetchedTasks = await getTasks(courseId, jwt_token);
-    setTasks(fetchedTasks.data.tasks);
+  const retrieveTask = async (id: string, jwt_token: string) => {
+    const fetchedTasks = await getTaskById(id, jwt_token);
+    setTask(fetchedTasks.data.task);
   };
 
   useEffect(() => {
@@ -36,13 +35,13 @@ export default function LoginPage() {
       return;
     }
     validateUser(jwt_token);
-    retrieveTasks(courseId!, jwt_token);
+    retrieveTask(id!, jwt_token);
   }, []);
 
   return (
     <div className={styles.container}>
       <Header />
-      <TasksWrapper tasks={tasks} />
+      {task && <div>{task.title}</div>}
     </div>
   );
 }

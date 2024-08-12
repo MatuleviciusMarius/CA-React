@@ -5,6 +5,7 @@ import NotFound from "../pages/notFound";
 import Main from "../pages/main";
 import Register from "../pages/register";
 import Course from "../pages/course";
+import Task from "../pages/task";
 
 export default function Router() {
   return (
@@ -14,6 +15,7 @@ export default function Router() {
       <Route path={RoutePaths.notFound} element={<NotFound />} />
       <Route path={RoutePaths.register} element={<Register />} />
       <Route path={RoutePaths.course} element={<Course />} />
+      <Route path={RoutePaths.task} element={<Task />} />
     </Routes>
   );
 }
