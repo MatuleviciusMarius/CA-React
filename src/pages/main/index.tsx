@@ -6,7 +6,7 @@ import { validateLogin } from "../../api/login";
 import { useNavigate } from "react-router-dom";
 import { getCourses } from "../../api/courses";
 import { Course } from "../../types/course";
-import CourseCard from "../../components/CourseCard/CourseCard";
+import CoursesWrapper from "../../components/CoursesWrapper/CoursesWrapper";
 
 export default function LoginPage() {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -40,14 +40,7 @@ export default function LoginPage() {
   return (
     <div className={styles.container}>
       <Header />
-      {courses?.map((c) => (
-        <CourseCard
-          id={c.id}
-          title={c.title}
-          description={c.description}
-          imgUrl={c.imgUrl}
-        />
-      ))}
+      <CoursesWrapper courses={courses} />
     </div>
   );
 }

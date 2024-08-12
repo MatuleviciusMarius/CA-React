@@ -10,7 +10,7 @@ type CourseCardProps = {
 
 const CourseCard = ({ id, imgUrl, title, description }: CourseCardProps) => {
   return (
-    <Link to={id} key={id} className={styles.main}>
+    <Link to={id} className={styles.main}>
       <img src={imgUrl} alt="course photo" />
       <h2>{title}</h2>
       <p>{description}</p>
