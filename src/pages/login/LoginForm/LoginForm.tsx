@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { login } from "../../../api/login";
 import { UserLogin } from "../../../types/user";
 import { useNavigate } from "react-router-dom";
+import { RoutePaths } from "../../../router/routes";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ export default function LoginForm() {
     console.log(response.status);
     if (response.status === 200) {
       cookie.set("jwt_token", response.data.jwt_token);
-      navigate("/");
+      navigate(RoutePaths.main);
     }
   }
 
@@ -54,7 +55,7 @@ export default function LoginForm() {
         <Button variant="contained" type="submit">
           {t("login")}
         </Button>
-        <Link href="register">Register</Link>
+        <Link href={RoutePaths.register}>{t("register")}</Link>
       </form>
     </Box>
   );

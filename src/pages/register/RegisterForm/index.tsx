@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { registerUser } from "../../../api/register";
 import { UserRegistration } from "../../../types/user";
 import { useNavigate } from "react-router-dom";
+import { RoutePaths } from "../../../router/routes";
 
 type FormData = {
   name: string;
@@ -48,7 +49,7 @@ export default function LoginForm() {
 
     if (response.status === 200) {
       cookie.set("jwt_token", response.data.jwt_token);
-      navigate("/");
+      navigate(RoutePaths.main);
     }
   }
 
@@ -59,7 +60,7 @@ export default function LoginForm() {
       justifyContent={"center"}
       flexDirection={"column"}
     >
-      <h1>Register</h1>
+      <h1>{t("register")}</h1>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <TextField
           size="medium"
@@ -132,9 +133,9 @@ export default function LoginForm() {
           {...register("password")}
         />
         <Button variant="contained" type="submit">
-          {t("login")}
+          {t("register")}
         </Button>
-        <Link href="#">Register</Link>
+        <Link href={RoutePaths.login}>{t("login")}</Link>
       </form>
     </Box>
   );

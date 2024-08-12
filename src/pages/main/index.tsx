@@ -1,25 +1,15 @@
 import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import styles from "./Main.module.scss";
-import cookie from "js-cookie";
-import { validateLogin } from "../../api/login";
-import { useNavigate } from "react-router-dom";
 import { getCourses } from "../../api/courses";
 import { Course } from "../../types/course";
 import CoursesWrapper from "../../components/CoursesWrapper/CoursesWrapper";
+import { useValidateUser } from "../../hooks/useValidateUser";
 
 export default function LoginPage() {
   const [courses, setCourses] = useState<Course[]>([]);
-  const navigate = useNavigate();
+  const { jwt_token } = useValidateUser();
 
-  const validateUser = async (jwt_token: string) => {
-    const response = await validateLogin(jwt_token);
-
-    if (response.status !== 200) {
-      navigate("/login");
-      return;
-    }
-  };
 
   const retrieveCourses = async (jwt_token: string) => {
     const fetchedCourses = await getCourses(jwt_token);
@@ -27,13 +17,6 @@ export default function LoginPage() {
   };
 
   useEffect(() => {
-    const jwt_token = cookie.get("jwt_token");
-
-    if (!jwt_token) {
-      navigate("/login");
-      return;
-    }
-    validateUser(jwt_token);
     retrieveCourses(jwt_token);
   }, []);
 

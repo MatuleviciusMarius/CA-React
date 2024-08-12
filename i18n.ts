@@ -1,7 +1,7 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-type SupportedLanguageKeys = keyof typeof supportedLanguages;
+export type SupportedLanguageKeys = keyof typeof supportedLanguages;
 
 export const supportedLanguages = {
   en: "en",
@@ -24,6 +24,7 @@ const resources = {
       email: "Email",
       login: "Login",
       language: "Language",
+      register: "Register",
     },
   },
 
@@ -34,6 +35,7 @@ const resources = {
       email: "El. paštas",
       login: "Prisijungti",
       language: "Kalba",
+      register: "Registruotis",
     },
   },
 };
