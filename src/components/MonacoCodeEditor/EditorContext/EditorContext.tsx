@@ -1,18 +1,20 @@
 import React, { createContext, useReducer, useContext, ReactNode } from 'react';
 
-type EditorState = {
+interface EditorState {
   htmlContent: string;
   cssContent: string;
+  jsContent: string;
 }
 
 type Action =
-  | { type: "SET_HTML_CONTENT"; payload: string }
-  | { type: 'SET_CSS_CONTENT'; payload: string };
+  | { type: 'SET_HTML_CONTENT'; payload: string }
+  | { type: 'SET_CSS_CONTENT'; payload: string }
+  | { type: 'SET_JS_CONTENT'; payload: string };
 
-// Define the initial state
 const initialState: EditorState = {
   htmlContent: '',
   cssContent: '',
+  jsContent: '',
 };
 
 // Create the reducer function
@@ -22,6 +24,8 @@ function editorReducer(state: EditorState, action: Action): EditorState {
       return { ...state, htmlContent: action.payload };
     case 'SET_CSS_CONTENT':
       return { ...state, cssContent: action.payload };
+    case 'SET_JS_CONTENT':
+      return { ...state, jsContent: action.payload };
     default:
       return state;
   }

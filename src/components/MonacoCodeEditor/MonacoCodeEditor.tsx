@@ -1,55 +1,71 @@
 import Editor from "@monaco-editor/react";
 import { useEditorContext } from "./EditorContext/EditorContext";
+import { useEffect, useRef, useState } from "react";
+import { Box, Button } from "@mui/material";
 
-const options = {
-  autoIndent: 'full',
-  contextmenu: true,
-  fontFamily: 'monospace',
-  fontSize: 13,
-  lineHeight: 24,
-  hideCursorInOverviewRuler: true,
-  matchBrackets: 'always',
-  minimap: {
-    enabled: true,
+const editorTypes = {
+  html: {
+    language: "html",
+    defaultValue: "<h1>Hello, World!</h1>",
   },
-  scrollbar: {
-    horizontalSliderSize: 4,
-    verticalSliderSize: 18,
+  css: {
+    language: "css",
+    defaultValue: "h1 { color: blue; }",
   },
-  selectOnLineNumbers: true,
-  roundedSelection: false,
-  readOnly: false,
-  cursorStyle: 'line',
-  automaticLayout: true,
-}; 
+  javascript: {
+    language: "javascript",
+    defaultValue: 'console.log("Hello, World!");',
+  },
+};
 
 export default function MonacoCodeEditor() {
+  const [selectedEditor, setSelectedEditor] = useState(editorTypes.javascript);
   const { dispatch } = useEditorContext();
 
   function handleEditorChange(value: string | undefined) {
-    dispatch({ type: "SET_HTML_CONTENT", payload: value || '' });
+    if (selectedEditor.language === editorTypes.html.language) {
+      dispatch({ type: "SET_HTML_CONTENT", payload: value || "" });
+    } else if (selectedEditor.language === editorTypes.css.language) {
+      dispatch({ type: "SET_CSS_CONTENT", payload: value || "" });
+    } else if (selectedEditor.language === editorTypes.javascript.language) {
+      dispatch({ type: "SET_JS_CONTENT", payload: value || "" });
+    }
   }
 
+  const editorRef = useRef<any>(null);
+
+  useEffect(() => {
+    editorRef.current?.focus();
+  }, [selectedEditor]);
+
+  useEffect(() => {
+    dispatch({ type: "SET_HTML_CONTENT", payload: editorTypes.html.defaultValue });
+    dispatch({ type: "SET_CSS_CONTENT", payload: editorTypes.css.defaultValue });
+    dispatch({ type: "SET_JS_CONTENT", payload: editorTypes.javascript.defaultValue });
+  }, [dispatch]);
+
   return (
-    <>
+    <div>
+      <Box>
+        <Button variant="outlined" disabled={selectedEditor.language === editorTypes.javascript.language} onClick={() => setSelectedEditor(editorTypes.javascript)}>
+          script.js
+        </Button>
+        <Button variant="outlined" disabled={selectedEditor.language === editorTypes.css.language} onClick={() => setSelectedEditor(editorTypes.css)}>
+          style.css
+        </Button>
+        <Button variant="outlined" disabled={selectedEditor.language === editorTypes.html.language} onClick={() => setSelectedEditor(editorTypes.html)}>
+          index.html
+        </Button>
+      </Box>
       <Editor
         height="90vh"
-        defaultLanguage="html"
+        onMount={(editor) => (editorRef.current = editor)}
         onChange={handleEditorChange}
         theme="vs-dark"
-        beforeMount={(monaco) => {
-          monaco.languages.html.htmlDefaults.setOptions({
-            suggest: {
-              html5: true,
-              angular1: false,
-              ionic: false,
-            },
-            data: {
-              useDefaultDataProvider: true,
-            },
-          });
-        }}
+        width={window.innerWidth / 2}
+        value={selectedEditor.defaultValue}
+        language={selectedEditor.language}
       />
-    </>
+    </div>
   );
 }
