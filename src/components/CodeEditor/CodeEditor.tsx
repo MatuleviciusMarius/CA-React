@@ -5,18 +5,28 @@ import styles from "./CodeEditor.module.scss";
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/mode-css";
 import "ace-builds/src-noconflict/theme-chaos";
-import HtmlDisplay from "../HtmllDisplay/HtmlDisplay";
+import HtmlDisplay from "./HtmllDisplay/HtmlDisplay";
+import { Tab, Tabs } from "@mui/material";
 
 const CodeEditor = () => {
   const [value, setValue] = useState("");
+  const [selectedTab, setSelectedTab] = useState(0);
 
   const onChange = (newValue: string) => {
     setValue(newValue);
   };
 
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setSelectedTab(newValue);
+  };
+
   return (
     <div className={styles.container}>
       <div>
+        <Tabs value={selectedTab} onChange={handleChange}>
+          <Tab label="HTML" />
+          <Tab label="CSS" />
+        </Tabs>
         <AceEditor
           width="100%"
           height="100vh"
@@ -31,6 +41,8 @@ const CodeEditor = () => {
             enableLiveAutocompletion: true,
             enableSnippets: true,
             showLineNumbers: true,
+            fontFamily: "Fira Code",
+            fontSize: "14px",
             tabSize: 2,
           }}
         />

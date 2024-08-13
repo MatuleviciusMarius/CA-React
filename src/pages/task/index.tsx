@@ -6,6 +6,9 @@ import { useParams } from "react-router-dom";
 import { getTaskById } from "../../api/tasks";
 import { Task } from "../../types/task";
 import { useValidateUser } from "../../hooks/useValidateUser";
+import MonacoCodeEditor from "../../components/MonacoCodeEditor/MonacoCodeEditor";
+import { EditorProvider } from "../../components/MonacoCodeEditor/EditorContext/EditorContext";
+import CodeRenderer from "../../components/MonacoCodeEditor/CodeRenderer/CodeRenderer";
 
 export default function LoginPage() {
   const [task, setTask] = useState<Task>();
@@ -17,6 +20,7 @@ export default function LoginPage() {
     const fetchedTasks = await getTaskById(id, jwt_token);
     setTask(fetchedTasks.data.task);
   };
+  console.log(task);
 
   useEffect(() => {
     retrieveTask(id!, jwt_token);
@@ -25,6 +29,10 @@ export default function LoginPage() {
   return (
     <div className={styles.container}>
       <Header />
+      <EditorProvider>
+        <MonacoCodeEditor />
+        <CodeRenderer />
+      </EditorProvider>
       {task && <div>{task.title}</div>}
     </div>
   );
