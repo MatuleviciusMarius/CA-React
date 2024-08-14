@@ -1,0 +1,13 @@
+.main {
+  all: unset;
+  padding: 0.8rem;
+  color: white;
+  background-color: var(--dark);
+  border-radius: 0.2rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.main:hover {
+  background-color: var(--dark-hover);
+}
