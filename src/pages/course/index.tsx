@@ -7,6 +7,8 @@ import { getTasks } from "../../api/tasks";
 import { Task } from "../../types/task";
 import TasksWrapper from "../../components/TasksWrapper/TasksWrapper";
 import { useValidateUser } from "../../hooks/useValidateUser";
+import Button from "../../components/Button/Button";
+import Spinner from "../../components/Spinner/Spinner";
 
 export default function LoginPage() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -26,7 +28,17 @@ export default function LoginPage() {
   return (
     <div className={styles.container}>
       <Header />
-      <TasksWrapper tasks={tasks} />
+
+      <div className={styles.wrapper}>
+        <Button
+          title="Continue"
+          onClick={() => {
+            console.log("xxx");
+          }}
+        />
+      </div>
+
+      {tasks ? <TasksWrapper tasks={tasks} /> : <Spinner />}
     </div>
   );
 }
