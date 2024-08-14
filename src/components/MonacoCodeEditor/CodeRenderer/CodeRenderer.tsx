@@ -20,7 +20,7 @@ export default function CodeRenderer() {
 `;
 
   return <Box border={1} flexGrow={1} marginTop={"37px"} height={"80vh"}>
-    <iframe srcDoc={srcDoc} style={{ width: "100%", border: "none" }} title="HTML Preview" />;
+    <iframe srcDoc={srcDoc} style={{ width: "100%", border: "none", height: "100%" }} title="HTML Preview" />
   </Box> 
   
 }
