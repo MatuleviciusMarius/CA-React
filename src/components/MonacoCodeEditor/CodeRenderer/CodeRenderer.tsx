@@ -22,10 +22,18 @@ export default function CodeRenderer() {
   return (
     <Box flexGrow={1} height={"80vh"}>
       <Box display={"flex"} gap={1} justifyContent={"right"}>
-        <Button variant="outlined">Ask AI for a help</Button>
-        <Button variant="outlined" color="success">Complete</Button>
+        <Button variant="outlined" color="success">
+          Ask AI for a help
+        </Button>
+        <Button variant="contained" color="success">
+          Complete
+        </Button>
       </Box>
-      <iframe srcDoc={srcDoc} style={{ width: "100%", border: "none", height: "100%" }} title="HTML Preview" />
+      <iframe
+        srcDoc={srcDoc}
+        style={{ width: "100%", border: "none", height: "100%" }}
+        title="HTML Preview"
+      />
     </Box>
   );
 }
