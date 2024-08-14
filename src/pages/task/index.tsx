@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Header from "../../components/Header";
-import styles from "./Main.module.scss";
 import { useParams } from "react-router-dom";
 
 import { getTaskById } from "../../api/tasks";
@@ -9,7 +8,7 @@ import { useValidateUser } from "../../hooks/useValidateUser";
 import MonacoCodeEditor from "../../components/MonacoCodeEditor/MonacoCodeEditor";
 import { EditorProvider } from "../../components/MonacoCodeEditor/EditorContext/EditorContext";
 import CodeRenderer from "../../components/MonacoCodeEditor/CodeRenderer/CodeRenderer";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 export default function LoginPage() {
   const [task, setTask] = useState<Task>();
@@ -27,15 +26,15 @@ export default function LoginPage() {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <Box minHeight={"100vh"}>
       <Header />
+      <Box height={"100%"} padding={1}>{task && <Typography>{task.title}</Typography>}</Box>
       <EditorProvider>
-        <Box display={"flex"}>
+        <Box padding={1} display={"flex"}>
           <MonacoCodeEditor />
           <CodeRenderer />
         </Box>
       </EditorProvider>
-      {task && <div>{task.title}</div>}
-    </div>
+    </Box>
   );
 }

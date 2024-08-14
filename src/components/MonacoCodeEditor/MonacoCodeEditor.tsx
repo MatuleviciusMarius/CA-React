@@ -58,7 +58,7 @@ export default function MonacoCodeEditor() {
         </Button>
       </Box>
       <Editor
-        height="90vh"
+        height="90%"
         onMount={(editor) => (editorRef.current = editor)}
         onChange={handleEditorChange}
         theme="vs-dark"
