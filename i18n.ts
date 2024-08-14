@@ -25,6 +25,8 @@ const resources = {
       login: "Login",
       language: "Language",
       register: "Register",
+      aiHelp: "Ask AI for a help",
+      complete: "Complete",
     },
   },
 
@@ -36,6 +38,8 @@ const resources = {
       login: "Prisijungti",
       language: "Kalba",
       register: "Registruotis",
+      aiHelp: "DI Pagalba",
+      complete: "Baigti",
     },
   },
 };

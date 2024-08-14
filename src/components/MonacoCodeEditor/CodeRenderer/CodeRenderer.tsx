@@ -1,8 +1,12 @@
 import { Box, Button } from "@mui/material";
 import { useEditorContext } from "../EditorContext/EditorContext";
+import { useTranslation } from "react-i18next";
 
 export default function CodeRenderer() {
   const { state } = useEditorContext();
+
+  const { t } = useTranslation();
+
 
   const srcDoc = `
   <!DOCTYPE html>
@@ -22,8 +26,8 @@ export default function CodeRenderer() {
   return (
     <Box flexGrow={1} height={"80vh"}>
       <Box display={"flex"} gap={1} justifyContent={"right"}>
-        <Button variant="outlined">Ask AI for a help</Button>
-        <Button variant="outlined" color="success">Complete</Button>
+        <Button variant="outlined">{t("aiHelp")}</Button>
+        <Button variant="outlined" color="success">{t("complete")}</Button>
       </Box>
       <iframe srcDoc={srcDoc} style={{ width: "100%", border: "none", height: "100%" }} title="HTML Preview" />
     </Box>
