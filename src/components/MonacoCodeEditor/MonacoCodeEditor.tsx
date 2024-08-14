@@ -19,7 +19,7 @@ const editorTypes = {
 };
 
 export default function MonacoCodeEditor() {
-  const [selectedEditor, setSelectedEditor] = useState(editorTypes.javascript);
+  const [selectedEditor, setSelectedEditor] = useState(editorTypes.html);
   const { dispatch } = useEditorContext();
 
   function handleEditorChange(value: string | undefined) {
@@ -47,15 +47,17 @@ export default function MonacoCodeEditor() {
   return (
     <Box>
       <Box height={"37px"} gap={1} display={"flex"}>
-        <Button variant="outlined" disabled={selectedEditor.language === editorTypes.javascript.language} onClick={() => setSelectedEditor(editorTypes.javascript)}>
-          script.js
-        </Button>
-        <Button variant="outlined" disabled={selectedEditor.language === editorTypes.css.language} onClick={() => setSelectedEditor(editorTypes.css)}>
-          style.css
-        </Button>
-        <Button variant="outlined" disabled={selectedEditor.language === editorTypes.html.language} onClick={() => setSelectedEditor(editorTypes.html)}>
-          index.html
-        </Button>
+        <Box display={"flex"} gap={1}>
+          <Button variant="outlined" disabled={selectedEditor.language === editorTypes.html.language} onClick={() => setSelectedEditor(editorTypes.html)}>
+            index.html
+          </Button>
+          <Button variant="outlined" disabled={selectedEditor.language === editorTypes.css.language} onClick={() => setSelectedEditor(editorTypes.css)}>
+            style.css
+          </Button>
+          <Button variant="outlined" disabled={selectedEditor.language === editorTypes.javascript.language} onClick={() => setSelectedEditor(editorTypes.javascript)}>
+            script.js
+          </Button>
+        </Box>
       </Box>
       <Box height={"80vh"}>
         <Editor

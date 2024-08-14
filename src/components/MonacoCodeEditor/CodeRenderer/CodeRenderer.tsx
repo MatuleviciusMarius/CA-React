@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useEditorContext } from "../EditorContext/EditorContext";
 
 export default function CodeRenderer() {
@@ -19,8 +19,13 @@ export default function CodeRenderer() {
   </html>
 `;
 
-  return <Box border={1} flexGrow={1} marginTop={"37px"} height={"80vh"}>
-    <iframe srcDoc={srcDoc} style={{ width: "100%", border: "none", height: "100%" }} title="HTML Preview" />
-  </Box> 
-  
+  return (
+    <Box flexGrow={1} height={"80vh"}>
+      <Box display={"flex"} gap={1} justifyContent={"right"}>
+        <Button variant="outlined">Ask AI for a help</Button>
+        <Button variant="outlined" color="success">Complete</Button>
+      </Box>
+      <iframe srcDoc={srcDoc} style={{ width: "100%", border: "none", height: "100%" }} title="HTML Preview" />
+    </Box>
+  );
 }
