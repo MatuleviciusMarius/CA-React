@@ -1,8 +1,11 @@
 import { Box, Button } from "@mui/material";
 import { useEditorContext } from "../EditorContext/EditorContext";
+import { useTranslation } from "react-i18next";
 
 export default function CodeRenderer() {
   const { state } = useEditorContext();
+
+  const { t } = useTranslation();
 
   const srcDoc = `
   <!DOCTYPE html>
@@ -27,6 +30,10 @@ export default function CodeRenderer() {
         </Button>
         <Button variant="contained" color="success">
           Complete
+        </Button>
+        <Button variant="outlined">{t("aiHelp")}</Button>
+        <Button variant="outlined" color="success">
+          {t("complete")}
         </Button>
       </Box>
       <iframe
