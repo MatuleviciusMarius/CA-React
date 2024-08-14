@@ -45,8 +45,8 @@ export default function MonacoCodeEditor() {
   }, [dispatch]);
 
   return (
-    <div>
-      <Box>
+    <Box>
+      <Box height={"37px"} gap={1} display={"flex"}>
         <Button variant="outlined" disabled={selectedEditor.language === editorTypes.javascript.language} onClick={() => setSelectedEditor(editorTypes.javascript)}>
           script.js
         </Button>
@@ -57,15 +57,26 @@ export default function MonacoCodeEditor() {
           index.html
         </Button>
       </Box>
-      <Editor
-        height="90%"
-        onMount={(editor) => (editorRef.current = editor)}
-        onChange={handleEditorChange}
-        theme="vs-dark"
-        width={window.innerWidth / 2}
-        value={selectedEditor.defaultValue}
-        language={selectedEditor.language}
-      />
-    </div>
+      <Box height={"80vh"}>
+        <Editor
+          height="100%"
+          onMount={(editor) => (editorRef.current = editor)}
+          onChange={handleEditorChange}
+          theme="vs-dark"
+          width={window.innerWidth / 2}
+          value={selectedEditor.defaultValue}
+          language={selectedEditor.language}
+          options={{
+            fontSize: 20,
+            autoClosingBrackets: "always",
+            padding: { top: 10 },
+            bracketPairColorization: {
+              enabled: true,
+            },
+            letterSpacing: 1,
+          }}
+        />
+      </Box>
+    </Box>
   );
 }
