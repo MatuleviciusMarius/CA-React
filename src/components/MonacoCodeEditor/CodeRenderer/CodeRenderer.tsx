@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { useEditorContext } from "../EditorContext/EditorContext";
 
 export default function CodeRenderer() {
@@ -18,5 +19,8 @@ export default function CodeRenderer() {
   </html>
 `;
 
-  return <iframe srcDoc={srcDoc} style={{ width: "50%", height: "90vh", border: "none" }} title="HTML Preview" />;
+  return <Box border={1} flexGrow={1} marginTop={"37px"} height={"80vh"}>
+    <iframe srcDoc={srcDoc} style={{ width: "100%", border: "none" }} title="HTML Preview" />;
+  </Box> 
+  
 }
