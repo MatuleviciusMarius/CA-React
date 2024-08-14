@@ -1,17 +1,17 @@
 .main {
   display: block;
   width: 100%;
-  background-color: rgb(228, 233, 237);
+  background-color: var(--dark);
   border-radius: 0.5rem;
   overflow: hidden;
   text-decoration: none;
-  color: black;
+  color: var(--white);
   transition: 0.3s;
   padding: 1rem;
 }
 
 .main:hover {
-  background-color: rgb(208, 219, 227);
+  background-color: var(--dark-hover);
   box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px,
     rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px,
     rgba(42, 51, 70, 0.04) 0px 2px 2px -1px,
