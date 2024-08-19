@@ -1,7 +1,8 @@
 import Editor from "@monaco-editor/react";
 import { useEditorContext } from "./EditorContext/EditorContext";
 import { useEffect, useRef, useState } from "react";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import styles from "./MonacoCodeEditor.module.scss";
 
 const editorTypes = {
   html: {
@@ -47,15 +48,21 @@ export default function MonacoCodeEditor() {
   return (
     <Box>
       <Box height={"37px"} gap={1} display={"flex"}>
-        <Box display={"flex"} gap={1}>
-          <Button variant="outlined" disabled={selectedEditor.language === editorTypes.html.language} onClick={() => setSelectedEditor(editorTypes.html)}>
-            index.html
+        <Box display={"flex"} className={styles.codeSelectWrapper} width={"100%"}>
+          <Button variant="text" disabled={selectedEditor.language === editorTypes.html.language} onClick={() => setSelectedEditor(editorTypes.html)}>
+            <Typography variant="caption" color={"white"}>
+              index.html
+            </Typography>
           </Button>
-          <Button variant="outlined" disabled={selectedEditor.language === editorTypes.css.language} onClick={() => setSelectedEditor(editorTypes.css)}>
-            style.css
+          <Button variant="text" disabled={selectedEditor.language === editorTypes.css.language} onClick={() => setSelectedEditor(editorTypes.css)}>
+            <Typography variant="caption" color={"white"}>
+              style.css
+            </Typography>
           </Button>
-          <Button variant="outlined" disabled={selectedEditor.language === editorTypes.javascript.language} onClick={() => setSelectedEditor(editorTypes.javascript)}>
-            script.js
+          <Button variant="text" disabled={selectedEditor.language === editorTypes.javascript.language} onClick={() => setSelectedEditor(editorTypes.javascript)}>
+            <Typography variant="caption" color={"white"}>
+              script.js
+            </Typography>
           </Button>
         </Box>
       </Box>

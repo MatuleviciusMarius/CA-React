@@ -25,14 +25,8 @@ export default function CodeRenderer() {
   return (
     <Box flexGrow={1} height={"80vh"}>
       <Box display={"flex"} gap={1} justifyContent={"right"}>
-        <Button variant="outlined" color="success">
-          Ask AI for a help
-        </Button>
-        <Button variant="contained" color="success">
-          Complete
-        </Button>
         <Button variant="outlined">{t("aiHelp")}</Button>
-        <Button variant="outlined" color="success">
+        <Button variant="contained" color="success">
           {t("complete")}
         </Button>
       </Box>

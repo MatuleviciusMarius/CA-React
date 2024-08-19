@@ -1,0 +1,9 @@
+.codeSelectWrapper {
+  background-color: var(--dark);
+}
+
+.codeSelectWrapper > button {
+  background-color: rgb(30, 30, 30);
+  color: var(--white) !important;
+  border-radius: 0;
+}
