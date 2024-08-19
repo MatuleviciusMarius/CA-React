@@ -10,6 +10,7 @@ export type Lesson = {
   taskHintContent: string;
   orderId: string;
   testsId: string;
-  aiAssistsCount: number;
-  submitsCount: number;
+  durationMins: number;
+  // aiAssistsCount: number;
+  // submitsCount: number;
 };
