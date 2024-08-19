@@ -1,20 +1,27 @@
 import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import styles from "./Main.module.scss";
-import { useParams } from "react-router-dom";
+import cookie from "js-cookie";
+import { validateLogin } from "../../api/login";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { getTasks } from "../../api/lessons";
 import { Task } from "../../types/lesson";
 import TasksWrapper from "../../components/TasksWrapper/TasksWrapper";
-import { useValidateUser } from "../../hooks/useValidateUser";
-import Button from "../../components/Button/Button";
-import Spinner from "../../components/Spinner/Spinner";
 
 export default function LoginPage() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const navigate = useNavigate();
   const { id: courseId } = useParams();
 
-  const { jwt_token } = useValidateUser();
+  const validateUser = async (jwt_token: string) => {
+    const response = await validateLogin(jwt_token);
+
+    if (response.status !== 200) {
+      navigate("/login");
+      return;
+    }
+  };
 
   const retrieveTasks = async (courseId: string, jwt_token: string) => {
     const fetchedTasks = await getTasks(courseId, jwt_token);
@@ -22,23 +29,20 @@ export default function LoginPage() {
   };
 
   useEffect(() => {
+    const jwt_token = cookie.get("jwt_token");
+
+    if (!jwt_token) {
+      navigate("/login");
+      return;
+    }
+    validateUser(jwt_token);
     retrieveTasks(courseId!, jwt_token);
-  }, [courseId, jwt_token]);
+  }, []);
 
   return (
     <div className={styles.container}>
       <Header />
-
-      <div className={styles.wrapper}>
-        <Button
-          title="Continue"
-          onClick={() => {
-            console.log("xxx");
-          }}
-        />
-      </div>
-
-      {tasks ? <TasksWrapper tasks={tasks} /> : <Spinner />}
+      <TasksWrapper tasks={tasks} />
     </div>
   );
 }

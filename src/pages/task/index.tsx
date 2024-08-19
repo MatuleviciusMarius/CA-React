@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import { useParams } from "react-router-dom";
 
-import { getTaskById } from "../../api/tasks";
-import { Task } from "../../types/task";
+import { getTaskById } from "../../api/lessons";
+import { Task } from "../../types/lesson";
 import { useValidateUser } from "../../hooks/useValidateUser";
 import MonacoCodeEditor from "../../components/MonacoCodeEditor/MonacoCodeEditor";
 import { EditorProvider } from "../../components/MonacoCodeEditor/EditorContext/EditorContext";

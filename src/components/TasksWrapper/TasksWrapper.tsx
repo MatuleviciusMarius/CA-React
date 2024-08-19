@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { Task } from "../../types/task";
+import { Task } from "../../types/lesson";
 import TaskCard from "../TaskCard/TaskCard";
 
 type CourseCardProps = {
