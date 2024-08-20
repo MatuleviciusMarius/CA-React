@@ -16,6 +16,7 @@ export type LoginResponse = {
 
 export const login = async (user: UserLogin) => {
   const response = await api.post<LoginResponse>("/users/login", user);
+  localStorage.setItem("user", JSON.stringify(response.data.user));
   return response;
 };
 

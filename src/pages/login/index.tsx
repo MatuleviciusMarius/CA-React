@@ -1,4 +1,4 @@
-import Header from "../../components/Header";
+import Header from "../../components/Header/Header";
 import Heading from "../../components/Heading/Heading";
 import PageWrapper from "../../components/PageWrapper";
 import LoginForm from "./LoginForm/LoginForm";

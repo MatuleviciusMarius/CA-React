@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Header from "../../components/Header";
+import Header from "../../components/Header/Header";
 import styles from "./Main.module.scss";
 import cookie from "js-cookie";
 import { validateLogin } from "../../api/login";
