@@ -1,0 +1,67 @@
+.main {
+  position: relative;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  cursor: pointer;
+}
+
+.user {
+  border: 1px solid rgb(188, 188, 188);
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #575757;
+  position: relative;
+  top: 0.2rem;
+}
+
+.modal {
+  padding: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  position: absolute;
+  min-width: 200px;
+  right: 0;
+  top: 2.8rem;
+  border-radius: 0.3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal button {
+  all: unset;
+  width: 100%;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border-radius: 0.2rem;
+  padding: 0.4rem;
+  transition: 0.3s;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.modal button:hover {
+  background-color: #f1f1f1;
+}
+
+.modal div {
+  all: unset;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
