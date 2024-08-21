@@ -1,6 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { useEditorContext } from "../EditorContext/EditorContext";
 import { useTranslation } from "react-i18next";
+import { completeLesson } from "../../../api/lessons";
 
 export default function CodeRenderer() {
   const { state } = useEditorContext();
@@ -22,11 +23,15 @@ export default function CodeRenderer() {
   </html>
 `;
 
+const handleComplete = () => {
+  completeLesson()
+}
+
   return (
     <Box flexGrow={1} height={"80vh"}>
       <Box display={"flex"} gap={1} justifyContent={"right"}>
         <Button variant="outlined">{t("aiHelp")}</Button>
-        <Button variant="contained" color="success">
+        <Button onClick={handleComplete} variant="contained" color="success">
           {t("complete")}
         </Button>
       </Box>

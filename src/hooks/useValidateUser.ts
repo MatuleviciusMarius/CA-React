@@ -12,9 +12,9 @@ export const useValidateUser = () => {
   );
 
   const validateUser = useCallback(
-    async (jwt_token: string) => {
-      const response = await validateLogin(jwt_token);
-
+    async () => {
+      const response = await validateLogin();
+      
       if (response.status !== 200) {
         navigate(RoutePaths.login);
         localStorage.removeItem("user");
@@ -30,7 +30,7 @@ export const useValidateUser = () => {
       localStorage.removeItem("user");
       return;
     }
-    validateUser(jwt_token);
+    validateUser();
   }, [jwt_token, navigate, validateUser]);
 
   return { jwt_token: jwt_token!, user: userInfo };

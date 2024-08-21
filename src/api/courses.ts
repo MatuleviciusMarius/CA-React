@@ -5,9 +5,7 @@ export type CoursesResponse = {
   courses: Course[];
 };
 
-export const getCourses = async (jwt_token: string) => {
-  const response = await basApi.get<CoursesResponse>("/courses", {
-    headers: { authorization: jwt_token },
-  });
+export const getCourses = async () => {
+  const response = await basApi.get<CoursesResponse>("/courses");
   return response;
 };

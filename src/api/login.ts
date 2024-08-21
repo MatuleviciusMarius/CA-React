@@ -1,5 +1,6 @@
 import { User, UserLogin } from "../types/user";
 import baseApi from "./baseApi";
+import Cookies from "js-cookie";
 
 export type LoginResponse = {
   message: string;
@@ -13,9 +14,14 @@ export const login = async (user: UserLogin) => {
   return response;
 };
 
-export const validateLogin = async (jwt_token: string) => {
-  const response = await baseApi.get("/users/validate", {
-    headers: { authorization: jwt_token },
-  });
-  return response;
+export const validateLogin = async () => {
+  try {
+    const response = await baseApi.get("/users/validate");
+
+    return response;
+  } catch (error) {
+    Cookies.remove("jwt_token");
+    localStorage.removeItem("user");
+    return error;
+  }
 };

@@ -6,16 +6,19 @@ import Main from "../pages/main";
 import Register from "../pages/register";
 import Course from "../pages/course";
 import Task from "../pages/task";
+import ProtectedRoutesWrapper from "./ProtectedRoutesWrapper/ProtectedRoutesWrapper.tsx";
 
 export default function Router() {
   return (
     <Routes>
-      <Route path={RoutePaths.main} element={<Main />} />
       <Route path={RoutePaths.login} element={<Login />} />
-      <Route path={RoutePaths.notFound} element={<NotFound />} />
       <Route path={RoutePaths.register} element={<Register />} />
-      <Route path={RoutePaths.course} element={<Course />} />
-      <Route path={RoutePaths.task} element={<Task />} />
+      <Route element={<ProtectedRoutesWrapper />}>
+        <Route path={RoutePaths.main} element={<Main />} />
+        <Route path={RoutePaths.notFound} element={<NotFound />} />
+        <Route path={RoutePaths.course} element={<Course />} />
+        <Route path={RoutePaths.task} element={<Task />} />
+      </Route>
     </Routes>
   );
 }
