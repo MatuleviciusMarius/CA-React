@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 
 import { getTaskById } from "../../api/lessons";
 import { Task } from "../../types/lesson";
-import { useValidateUser } from "../../hooks/useValidateUser";
 import MonacoCodeEditor from "../../components/MonacoCodeEditor/MonacoCodeEditor";
 import { EditorProvider } from "../../components/MonacoCodeEditor/EditorContext/EditorContext";
 import CodeRenderer from "../../components/MonacoCodeEditor/CodeRenderer/CodeRenderer";
@@ -15,15 +14,13 @@ export default function LoginPage() {
   const [task, setTask] = useState<Task>();
   const { id } = useParams();
 
-  const { jwt_token } = useValidateUser();
-
-  const retrieveTask = async (id: string, jwt_token: string) => {
-    const fetchedTasks = await getTaskById(id, jwt_token);
+  const retrieveTask = async (id: string) => {
+    const fetchedTasks = await getTaskById(id);
     setTask(fetchedTasks.data.task);
   };
 
   useEffect(() => {
-    retrieveTask(id!, jwt_token);
+    retrieveTask(id!);
   }, []);
 
   return (

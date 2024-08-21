@@ -1,11 +1,14 @@
 import { Box, Button } from "@mui/material";
 import { useEditorContext } from "../EditorContext/EditorContext";
 import { useTranslation } from "react-i18next";
-import { completeLesson } from "../../../api/lessons";
+import { completeLesson, CompleteLessonModel } from "../../../api/lessons";
 
-export default function CodeRenderer() {
+type CodeRendererProps = {
+  lessonId: string;
+};
+
+export default function CodeRenderer({ lessonId } : CodeRendererProps) {
   const { state } = useEditorContext();
-
   const { t } = useTranslation();
 
   const srcDoc = `
@@ -24,7 +27,12 @@ export default function CodeRenderer() {
 `;
 
 const handleComplete = () => {
-  completeLesson()
+  const body: CompleteLessonModel = {
+    userId: "userId",
+    code: srcDoc,
+  }
+
+  completeLesson(lessonId, body)
 }
 
   return (
