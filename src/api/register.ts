@@ -1,12 +1,5 @@
-import axios from "axios";
 import { User, UserRegistration } from "../types/user";
-
-const API_PORT = "3002";
-const API_ENDPOINT = `http://localhost:${API_PORT}`;
-
-const api = axios.create({
-  baseURL: API_ENDPOINT,
-});
+import baseApi from "./baseApi";
 
 export type RegisterResponse = {
   message: string;
@@ -15,6 +8,6 @@ export type RegisterResponse = {
 };
 
 export const registerUser = async (user: UserRegistration) => {
-  const response = await api.post<RegisterResponse>("/users", user);
+  const response = await baseApi.post<RegisterResponse>("/users", user);
   return response;
 };

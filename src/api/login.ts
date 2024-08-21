@@ -1,12 +1,5 @@
-import axios from "axios";
 import { User, UserLogin } from "../types/user";
-
-const API_PORT = "3002";
-const API_ENDPOINT = `http://localhost:${API_PORT}`;
-
-const api = axios.create({
-  baseURL: API_ENDPOINT,
-});
+import baseApi from "./baseApi";
 
 export type LoginResponse = {
   message: string;
@@ -15,13 +8,13 @@ export type LoginResponse = {
 };
 
 export const login = async (user: UserLogin) => {
-  const response = await api.post<LoginResponse>("/users/login", user);
+  const response = await baseApi.post<LoginResponse>("/users/login", user);
   localStorage.setItem("user", JSON.stringify(response.data.user));
   return response;
 };
 
 export const validateLogin = async (jwt_token: string) => {
-  const response = await api.get("/users/validate", {
+  const response = await baseApi.get("/users/validate", {
     headers: { authorization: jwt_token },
   });
   return response;

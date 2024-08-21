@@ -1,19 +1,12 @@
-import axios from "axios";
 import { Lesson } from "../types/lesson";
-
-const API_PORT = "3002";
-const API_ENDPOINT = `http://localhost:${API_PORT}`;
-
-const api = axios.create({
-  baseURL: API_ENDPOINT,
-});
+import baseApi from "./baseApi";
 
 export type LessonsResponse = {
   tasks: Lesson[];
 };
 
 export const getTasks = async (courseId: string, jwt_token: string) => {
-  const response = await api.get<LessonsResponse>(
+  const response = await baseApi.get<LessonsResponse>(
     `/lessons/course/${courseId}`,
     {
       headers: { authorization: jwt_token },
@@ -27,14 +20,14 @@ export type LessonResponse = {
 };
 
 export const getTaskById = async (id: string, jwt_token: string) => {
-  const response = await api.get<LessonResponse>(`/lessons/${id}`, {
+  const response = await baseApi.get<LessonResponse>(`/lessons/${id}`, {
     headers: { authorization: jwt_token },
   });
   return response;
 };
 
 export const getTaskByLevel = async (level: number, jwt_token: string) => {
-  const response = await api.get<LessonsResponse>(`/lessons/${level}`, {
+  const response = await baseApi.get<LessonsResponse>(`/lessons/${level}`, {
     headers: { authorization: jwt_token },
   });
   return response;
