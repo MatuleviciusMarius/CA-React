@@ -4,7 +4,7 @@ import styles from "./Main.module.scss";
 import { useParams } from "react-router-dom";
 import { getLessons } from "../../api/lessons";
 import { Lesson } from "../../types/lesson";
-import TasksWrapper from "../../components/TasksWrapper/LessonsWrapper";
+import LessonsWrapper from "../../components/TasksWrapper/LessonsWrapper";
 import Button from "../../components/Button/Button";
 import Spinner from "../../components/Spinner/Spinner";
 
@@ -38,7 +38,7 @@ export default function LoginPage() {
         />
       </div>
 
-      {lessons ? <TasksWrapper lessons={lessons} /> : <Spinner />}
+      {lessons ? <LessonsWrapper lessons={lessons} /> : <Spinner />}
     </div>
   );
 }
