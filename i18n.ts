@@ -3,6 +3,8 @@ import { initReactI18next } from "react-i18next";
 
 export type SupportedLanguageKeys = keyof typeof supportedLanguages;
 
+export type SupportedLanguages = "en" | "lt"; // or use your SupportedLanguageKeys
+
 export const supportedLanguages = {
   en: "en",
   lt: "lt",
