@@ -1,16 +1,21 @@
 export type Lesson = {
   id: string;
   courseId: string;
-  title: string;
-  description: string;
-  lessonContent: string;
-  taskContent: string;
   difficulty: string;
   answer: string;
   taskHintContent: string;
   orderId: string;
   testsId: string;
   durationMins: number;
+  lessonContent_en: string;
+  lessonContent_lt: string;
+  taskContent_en: string;
+  taskContent_lt: string;
+  title_en: string;
+  title_lt: string;
+  taskHintContent_en: string;
+  taskHintContent_lt: string;
+
   // aiAssistsCount: number;
   // submitsCount: number;
 };

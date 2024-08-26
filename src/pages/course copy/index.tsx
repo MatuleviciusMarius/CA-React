@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { getTasks } from "../../api/lessons";
 import { Task } from "../../types/lesson";
-import TasksWrapper from "../../components/TasksWrapper/TasksWrapper";
+import TasksWrapper from "../../components/TasksWrapper/LessonsWrapper";
 
 export default function LoginPage() {
   const [tasks, setTasks] = useState<Task[]>([]);
