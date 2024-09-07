@@ -5,9 +5,10 @@ import { completeLesson, CompleteLessonModel } from "../../../api/lessons";
 
 type CodeRendererProps = {
   lessonId: string;
+  userId: string;
 };
 
-export default function CodeRenderer({ lessonId } : CodeRendererProps) {
+export default function CodeRenderer({ lessonId, userId } : CodeRendererProps) {
   const { state } = useEditorContext();
   const { t } = useTranslation();
 
@@ -28,7 +29,7 @@ export default function CodeRenderer({ lessonId } : CodeRendererProps) {
 
 const handleComplete = () => {
   const body: CompleteLessonModel = {
-    userId: "userId",
+    userId,
     code: srcDoc,
   }
 
