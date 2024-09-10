@@ -6,9 +6,7 @@ export type LessonsResponse = {
 };
 
 export const getLessons = async (courseId: string) => {
-  const response = await baseApi.get<LessonsResponse>(
-    `/lessons/course/${courseId}`
-  );
+  const response = await baseApi.get<LessonsResponse>(`/lessons/course/${courseId}`);
   return response;
 };
 
@@ -31,11 +29,12 @@ export type CompleteLessonModel = {
   userId: string;
 };
 
-export const completeLesson = async (
-  lessonId: string,
-  model: CompleteLessonModel
-) => {
+export const completeLesson = async (lessonId: string, model: CompleteLessonModel) => {
   const response = await baseApi.post(`/lessons/${lessonId}/complete`, model);
+  return response;
+};
 
-  console.log(response);
+export const getAiHelp = async (lessonId: string, code: string) => {
+  const response = await baseApi.post(`/openai/${lessonId}`, { code });
+  return response.data.data;
 };

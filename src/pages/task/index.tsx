@@ -16,7 +16,6 @@ export default function TaskPage() {
   const [task, setTask] = useState<Lesson>();
   const { id } = useParams();
   const languageCode = useActiveLanguage();
-  console.log(languageCode);
   
   const userInfo = useUserData();
 
@@ -28,7 +27,8 @@ export default function TaskPage() {
   useEffect(() => {
     retrieveTask(id!);
   }, []);
-
+  console.log(task);
+  
   return (
     <Box minHeight={"100vh"}>
       <Header isUserLoggedIn={!!userInfo.email} name={userInfo.name} />
