@@ -26,6 +26,13 @@
   line-height: 1.5;
 }
 
+.task code {
+  border: rgba(255, 0, 0, 0.564) 2px solid;
+  padding: 0.1rem 0.1rem;
+  border-radius: 0.3rem;
+  display: inline-block;
+}
+
 .lesson code {
   border: rgba(255, 0, 0, 0.564) 2px solid;
   padding: 0.1rem 0.1rem;
