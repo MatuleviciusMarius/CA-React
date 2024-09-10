@@ -11,6 +11,23 @@
   padding: 2rem 1rem;
 }
 
+.title {
+  font-size: 2rem;
+  margin-top: 0.5rem !important;
+}
+
 .task {
   margin-top: 2rem;
+  line-height: 1.5;
+}
+
+.lesson {
+  margin-top: 1rem;
+  line-height: 1.5;
+}
+
+.lesson code {
+  border: rgba(255, 0, 0, 0.564) 2px solid;
+  padding: 0.1rem 0.1rem;
+  border-radius: 0.3rem;
 }

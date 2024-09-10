@@ -42,10 +42,15 @@ export default function LessonPage() {
     <Box minHeight={"100vh"}>
       <Header isUserLoggedIn={!!userInfo.email} name={userInfo.name} />
       <Box height={"100%"} padding={1} className={styles.taskDescription}>
-        {lesson && <Typography>{lesson[lessonTitleKey]}</Typography>}
+        {lesson && (
+          <Typography className={styles.title} fontSize={26}>
+            {lesson[lessonTitleKey]}
+          </Typography>
+        )}
         {lesson && (
           <>
             <div
+              className={styles.lesson}
               dangerouslySetInnerHTML={{
                 __html: lesson[lessonContentKey],
               }}
