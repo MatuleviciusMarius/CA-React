@@ -5,7 +5,7 @@ import NotFound from "../pages/notFound";
 import Main from "../pages/main";
 import Register from "../pages/register";
 import Course from "../pages/course";
-import Task from "../pages/task";
+import Lesson from "../pages/lesson";
 import ProtectedRoutesWrapper from "./ProtectedRoutesWrapper/ProtectedRoutesWrapper.tsx";
 
 export default function Router() {
@@ -17,7 +17,7 @@ export default function Router() {
         <Route path={RoutePaths.main} element={<Main />} />
         <Route path={RoutePaths.notFound} element={<NotFound />} />
         <Route path={RoutePaths.course} element={<Course />} />
-        <Route path={RoutePaths.task} element={<Task />} />
+        <Route path={RoutePaths.task} element={<Lesson />} />
       </Route>
     </Routes>
   );
