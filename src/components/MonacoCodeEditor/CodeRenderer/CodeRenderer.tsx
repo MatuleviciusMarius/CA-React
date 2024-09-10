@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { useEditorContext } from "../EditorContext/EditorContext";
 import { useTranslation } from "react-i18next";
-import { completeLesson, CompleteLessonModel, getAiHelp } from "../../../api/lessons";
+import { AiHelpModel, completeLesson, CompleteLessonModel, getAiHelp } from "../../../api/lessons";
 import { useState } from "react";
 
 type CodeRendererProps = {
@@ -39,7 +39,14 @@ export default function CodeRenderer({ lessonId, userId }: CodeRendererProps) {
   };
 
   const handleGetAiHelp = async () => {
-    const response = await getAiHelp(lessonId, srcDoc);
+    const body: AiHelpModel = {
+      code: srcDoc,
+      lessonId,
+    }
+
+    const response = await getAiHelp(userId, body);
+    console.log(response);
+    
     setAiResponse(response);
   };
 

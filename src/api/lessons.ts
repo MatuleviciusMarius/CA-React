@@ -34,7 +34,18 @@ export const completeLesson = async (lessonId: string, model: CompleteLessonMode
   return response;
 };
 
-export const getAiHelp = async (lessonId: string, code: string) => {
-  const response = await baseApi.post(`/openai/${lessonId}`, { code });
+export type AiHelpModel = {
+  code: string;
+  lessonId: string;
+};
+
+export type AiHelpResponse = {
+  data: {
+    response: string;
+  }
+};
+
+export const getAiHelp = async (lessonId: string, body: AiHelpModel) => {
+  const response = await baseApi.post<AiHelpResponse>(`/openai/${lessonId}`, body);
   return response.data.data;
 };
