@@ -15,6 +15,7 @@ export type Lesson = {
   title_lt: string;
   taskHintContent_en: string;
   taskHintContent_lt: string;
+  initialCode: string;
 
   // aiAssistsCount: number;
   // submitsCount: number;
