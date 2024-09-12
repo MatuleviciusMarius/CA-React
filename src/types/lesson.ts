@@ -15,7 +15,9 @@ export type Lesson = {
   title_lt: string;
   taskHintContent_en: string;
   taskHintContent_lt: string;
-  initialCode: string;
+  initialHtmlCode: string;
+  initialCssCode: string;
+  initialJsCode: string;
 
   // aiAssistsCount: number;
   // submitsCount: number;
