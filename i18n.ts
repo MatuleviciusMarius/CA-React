@@ -29,6 +29,7 @@ const resources = {
       register: "Register",
       aiHelp: "Ask AI for a help",
       complete: "Complete",
+      back: "Back",
     },
   },
 
@@ -42,6 +43,7 @@ const resources = {
       register: "Registruotis",
       aiHelp: "DI Pagalba",
       complete: "Baigti",
+      back: "Atgal",
     },
   },
 };
