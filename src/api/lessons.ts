@@ -40,9 +40,7 @@ export type AiHelpModel = {
 };
 
 export type AiHelpResponse = {
-  data: {
-    response: string;
-  }
+  data: string;
 };
 
 export const getAiHelp = async (lessonId: string, body: AiHelpModel) => {

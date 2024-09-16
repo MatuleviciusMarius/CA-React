@@ -45,8 +45,7 @@ export default function CodeRenderer({ lessonId, userId }: CodeRendererProps) {
     }
 
     const response = await getAiHelp(userId, body);
-    console.log(response);
-    
+
     setAiResponse(response);
   };
 
