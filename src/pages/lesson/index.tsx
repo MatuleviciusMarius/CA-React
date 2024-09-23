@@ -82,6 +82,7 @@ export default function LessonPage() {
       <Button variant="outlined" onClick={() => navigate(-1)}>
         {"back"}
       </Button>
+
       <Box height={"100%"} padding={1} className={styles.taskDescription}>
         {lesson && (
           <Typography className={styles.title} fontSize={26}>
@@ -108,18 +109,17 @@ export default function LessonPage() {
       </Box>
 
       <AiResponseBox message={aiHelpMessage} />
-      <EditorProvider>
-        <Box padding={1} display={"flex"}>
-          <MonacoCodeEditor />
-          <CodeRenderer
-            lessonId={id!}
-            userId={userInfo.id}
-            onAskAiHelp={onAskAiHelp}
-            srcDoc={srcDoc}
-            isAiResponseLoading={isAiResponseLoading}
-          />
-        </Box>
-      </EditorProvider>
+
+      <Box padding={1} display={"flex"}>
+        <MonacoCodeEditor />
+        <CodeRenderer
+          lessonId={id!}
+          userId={userInfo.id}
+          onAskAiHelp={onAskAiHelp}
+          srcDoc={srcDoc}
+          isAiResponseLoading={isAiResponseLoading}
+        />
+      </Box>
     </Box>
   );
 }
