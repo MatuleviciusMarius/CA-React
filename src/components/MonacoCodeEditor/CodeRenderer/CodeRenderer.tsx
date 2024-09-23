@@ -1,4 +1,5 @@
 import { Box, Button } from "@mui/material";
+import styles from "./styles.module.css";
 import { useTranslation } from "react-i18next";
 import { completeLesson, CompleteLessonModel } from "../../../api/lessons";
 
@@ -7,6 +8,7 @@ type CodeRendererProps = {
   userId: string;
   onAskAiHelp: () => void;
   srcDoc: string;
+  isAiResponseLoading: boolean;
 };
 
 export default function CodeRenderer({
@@ -14,6 +16,7 @@ export default function CodeRenderer({
   userId,
   onAskAiHelp,
   srcDoc,
+  isAiResponseLoading,
 }: CodeRendererProps) {
   const { t } = useTranslation();
 
@@ -29,8 +32,16 @@ export default function CodeRenderer({
   return (
     <Box flexGrow={1} height={"80vh"}>
       <Box display={"flex"} gap={1} justifyContent={"right"}>
-        <Button onClick={onAskAiHelp} variant="outlined">
-          {t("aiHelp")}
+        <Button
+          className={styles.aiButton}
+          onClick={onAskAiHelp}
+          variant="outlined"
+        >
+          {isAiResponseLoading ? (
+            <span className={styles.loader}></span>
+          ) : (
+            <>{t("aiHelp")}</>
+          )}
         </Button>
         <Button onClick={handleComplete} variant="contained" color="success">
           {t("complete")}

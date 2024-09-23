@@ -19,12 +19,15 @@ import { Box, Button, Typography } from "@mui/material";
 import styles from "./Main.module.scss";
 import { useUserData } from "../../hooks/useUserData";
 import { useActiveLanguage } from "../../hooks/useActiveLanguage";
+import AiResponseBox from "../../components/AiResponseBox/AiResponseBox";
 
 export default function LessonPage() {
   const { state } = useEditorContext();
 
   const [lesson, setLesson] = useState<Lesson>();
   const [aiHelpMessage, setAiHelpMessage] = useState("");
+  const [isAiResponseLoading, setAiResponseLoading] = useState(false);
+
   const { id } = useParams();
   const activeLang = useActiveLanguage();
   const navigate = useNavigate();
@@ -61,6 +64,7 @@ export default function LessonPage() {
 `;
 
   const onAskAiHelp = async () => {
+    setAiResponseLoading(true);
     const body: AiHelpModel = {
       code: srcDoc,
       lessonId: id!,
@@ -69,6 +73,7 @@ export default function LessonPage() {
     const response = await getAiHelp(userInfo.id, body);
 
     setAiHelpMessage(response);
+    setAiResponseLoading(false);
   };
 
   return (
@@ -101,7 +106,8 @@ export default function LessonPage() {
           </>
         )}
       </Box>
-      {aiHelpMessage}
+
+      <AiResponseBox message={aiHelpMessage} />
       <EditorProvider>
         <Box padding={1} display={"flex"}>
           <MonacoCodeEditor />
@@ -110,6 +116,7 @@ export default function LessonPage() {
             userId={userInfo.id}
             onAskAiHelp={onAskAiHelp}
             srcDoc={srcDoc}
+            isAiResponseLoading={isAiResponseLoading}
           />
         </Box>
       </EditorProvider>
