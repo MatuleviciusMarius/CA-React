@@ -1,12 +1,52 @@
-// .container {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   min-height: 100vh;
-// }
+.container {
+}
 
 .wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.course {
+  padding: 0 2rem;
   display: flex;
-  justify-content: center;
-  margin-top: 4rem;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--dark);
+}
+
+.mobileTitle {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--dark);
+  display: none;
+  padding: 2rem;
+}
+
+.cover {
+  width: 100%;
+  border-radius: 0.5rem;
+  height: 400px;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 768px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .title {
+    display: none;
+  }
+
+  .mobileTitle {
+    display: inline-block;
+  }
 }

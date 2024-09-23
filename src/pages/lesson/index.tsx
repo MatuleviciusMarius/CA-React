@@ -10,10 +10,7 @@ import {
   TaskContent,
 } from "../../types/translations";
 import MonacoCodeEditor from "../../components/MonacoCodeEditor/MonacoCodeEditor";
-import {
-  EditorProvider,
-  useEditorContext,
-} from "../../components/MonacoCodeEditor/EditorContext/EditorContext";
+import { useEditorContext } from "../../components/MonacoCodeEditor/EditorContext/EditorContext";
 import CodeRenderer from "../../components/MonacoCodeEditor/CodeRenderer/CodeRenderer";
 import { Box, Button, Typography } from "@mui/material";
 import styles from "./Main.module.scss";

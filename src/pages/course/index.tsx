@@ -6,11 +6,15 @@ import { getLessons } from "../../api/lessons";
 import { Lesson } from "../../types/lesson";
 import LessonsWrapper from "../../components/TasksWrapper/LessonsWrapper";
 import Spinner from "../../components/Spinner/Spinner";
+import { getCourseById } from "../../api/courses";
+import { Course } from "../../types/course";
 
 export default function LoginPage() {
   const [lessons, setLessons] = useState<Lesson[]>([]);
+  const [course, setCourse] = useState<Course>();
   const { id: courseId } = useParams();
 
+  console.log("course", course);
   const retrieveTasks = async (courseId: string) => {
     const fetchedLessons = await getLessons(courseId);
     setLessons(fetchedLessons.data.tasks);
@@ -20,17 +24,32 @@ export default function LoginPage() {
     JSON.parse(localStorage.getItem("user") || "{}")
   );
 
+  const getLesson = async () => {
+    const response = await getCourseById("html_css");
+    console.log(response);
+    setCourse(response.data.course);
+  };
+
   useEffect(() => {
     retrieveTasks(courseId!);
+    getLesson();
   }, [courseId]);
 
   return (
     <div className={styles.container}>
       <Header isUserLoggedIn={userInfo.email} name={userInfo.name} />
 
-      <div>{lessons ? <LessonsWrapper lessons={lessons} /> : <Spinner />}</div>
-      <div>
-        <img src="" />
+      <div className={styles.wrapper}>
+        <div>
+          <h2 className={styles.mobileTitle}>{course?.title}</h2>
+
+          {lessons ? <LessonsWrapper lessons={lessons} /> : <Spinner />}
+        </div>
+        <div className={styles.course}>
+          <h2 className={styles.title}>{course?.title}</h2>
+          <p>{course?.description}</p>
+          <img className={styles.cover} src={course?.imgUrl} />
+        </div>
       </div>
     </div>
   );
