@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import { getLessons } from "../../api/lessons";
 import { Lesson } from "../../types/lesson";
 import LessonsWrapper from "../../components/TasksWrapper/LessonsWrapper";
-import Button from "../../components/Button/Button";
 import Spinner from "../../components/Spinner/Spinner";
 
 export default function LoginPage() {
@@ -29,16 +28,10 @@ export default function LoginPage() {
     <div className={styles.container}>
       <Header isUserLoggedIn={userInfo.email} name={userInfo.name} />
 
-      <div className={styles.wrapper}>
-        <Button
-          title="Continue"
-          onClick={() => {
-            console.log("xxx");
-          }}
-        />
+      <div>{lessons ? <LessonsWrapper lessons={lessons} /> : <Spinner />}</div>
+      <div>
+        <img src="" />
       </div>
-
-      {lessons ? <LessonsWrapper lessons={lessons} /> : <Spinner />}
     </div>
   );
 }

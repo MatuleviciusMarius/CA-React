@@ -3,3 +3,11 @@
   gap: 1rem;
   padding: 2rem;
 }
+
+.continue {
+  background-color: rgb(186, 151, 70);
+  color: var(--white);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
