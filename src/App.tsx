@@ -8,9 +8,25 @@ function App() {
   const { i18n } = useTranslation();
 
   useEffect(() => {
-    const browserLang = navigator.language.split("-")[0];
-    const isSupported = Object.values(supportedLanguages).includes(browserLang as SupportedLanguageKeys);
-    i18n.changeLanguage(isSupported ? browserLang : "en");
+    const storedLang = localStorage.getItem("language");
+
+    if (
+      storedLang &&
+      Object.values(supportedLanguages).includes(
+        storedLang as SupportedLanguageKeys
+      )
+    ) {
+      i18n.changeLanguage(storedLang);
+    } else {
+      const browserLang = navigator.language.split("-")[0];
+      const isSupported = Object.values(supportedLanguages).includes(
+        browserLang as SupportedLanguageKeys
+      );
+      const selectedLang = isSupported ? browserLang : "en";
+
+      i18n.changeLanguage(selectedLang);
+      localStorage.setItem("language", selectedLang);
+    }
   }, [i18n]);
 
   return <Router />;

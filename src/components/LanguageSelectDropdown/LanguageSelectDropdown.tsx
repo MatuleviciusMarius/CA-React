@@ -9,6 +9,7 @@ export default function LanguageSelectDropdown() {
 
   const handleChange = (event: SelectChangeEvent<string>) => {
     i18n.changeLanguage(event.target.value);
+    localStorage.setItem("language", event.target.value);
   };
 
   return (

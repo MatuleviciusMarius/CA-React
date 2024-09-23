@@ -48,9 +48,11 @@ const resources = {
   },
 };
 
+const activeLang = localStorage.getItem("language");
+
 i18n.use(initReactI18next).init({
   resources,
-  lng: "en",
+  lng: activeLang || "en",
   interpolation: {
     escapeValue: false,
   },
