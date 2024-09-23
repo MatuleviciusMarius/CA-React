@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { getLessonById } from "../../api/lessons";
+import { AiHelpModel, getAiHelp, getLessonById } from "../../api/lessons";
 import { Lesson } from "../../types/lesson";
 import {
   LessonTitle,
@@ -10,7 +10,10 @@ import {
   TaskContent,
 } from "../../types/translations";
 import MonacoCodeEditor from "../../components/MonacoCodeEditor/MonacoCodeEditor";
-import { EditorProvider } from "../../components/MonacoCodeEditor/EditorContext/EditorContext";
+import {
+  EditorProvider,
+  useEditorContext,
+} from "../../components/MonacoCodeEditor/EditorContext/EditorContext";
 import CodeRenderer from "../../components/MonacoCodeEditor/CodeRenderer/CodeRenderer";
 import { Box, Button, Typography } from "@mui/material";
 import styles from "./Main.module.scss";
@@ -18,7 +21,10 @@ import { useUserData } from "../../hooks/useUserData";
 import { useActiveLanguage } from "../../hooks/useActiveLanguage";
 
 export default function LessonPage() {
+  const { state } = useEditorContext();
+
   const [lesson, setLesson] = useState<Lesson>();
+  const [aiHelpMessage, setAiHelpMessage] = useState("");
   const { id } = useParams();
   const activeLang = useActiveLanguage();
   const navigate = useNavigate();
@@ -39,10 +45,38 @@ export default function LessonPage() {
   const lessonContentKey = `lessonContent_${activeLang}` as keyof LessonContent;
   const lessonTaskKey = `taskContent_${activeLang}` as keyof TaskContent;
 
+  const srcDoc = `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>${state.cssContent}</style>
+  </head>
+  <body>
+    ${state.htmlContent}
+    <script>${state.jsContent}</script>
+  </body>
+  </html>
+`;
+
+  const onAskAiHelp = async () => {
+    const body: AiHelpModel = {
+      code: srcDoc,
+      lessonId: id!,
+    };
+
+    const response = await getAiHelp(userInfo.id, body);
+
+    setAiHelpMessage(response);
+  };
+
   return (
     <Box minHeight={"100vh"}>
       <Header isUserLoggedIn={!!userInfo.email} name={userInfo.name} />
-      <Button variant="outlined" onClick={() => navigate(-1)}>{"back"}</Button>
+      <Button variant="outlined" onClick={() => navigate(-1)}>
+        {"back"}
+      </Button>
       <Box height={"100%"} padding={1} className={styles.taskDescription}>
         {lesson && (
           <Typography className={styles.title} fontSize={26}>
@@ -67,10 +101,16 @@ export default function LessonPage() {
           </>
         )}
       </Box>
+      {aiHelpMessage}
       <EditorProvider>
         <Box padding={1} display={"flex"}>
           <MonacoCodeEditor />
-          <CodeRenderer lessonId={id!} userId={userInfo.id} />
+          <CodeRenderer
+            lessonId={id!}
+            userId={userInfo.id}
+            onAskAiHelp={onAskAiHelp}
+            srcDoc={srcDoc}
+          />
         </Box>
       </EditorProvider>
     </Box>

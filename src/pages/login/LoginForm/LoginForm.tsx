@@ -7,19 +7,33 @@ import { login } from "../../../api/login";
 import { UserLogin } from "../../../types/user";
 import { useNavigate } from "react-router-dom";
 import { RoutePaths } from "../../../router/routes";
+import { useState } from "react";
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm<UserLogin>();
+  const [errorMessage, setErrorMessage] = useState("");
 
   const { t } = useTranslation();
 
   async function onSubmit(data: UserLogin) {
-    const response = await login(data);
+    try {
+      const response = await login(data);
 
-    if (response.status === 200) {
-      cookie.set("jwt_token", response.data.jwt_token);
-      navigate(RoutePaths.main);
+      if (response.status === 200) {
+        cookie.set("jwt_token", response.data.jwt_token);
+        navigate(RoutePaths.main);
+      }
+
+      if (response.status === 401) {
+        console.log("asas");
+        setErrorMessage("Inserted bad email or password");
+      }
+    } catch (e: any) {
+      if (e.response.status === 401) {
+        console.log("asas");
+        setErrorMessage("Inserted bad email or password");
+      }
     }
   }
 
@@ -51,6 +65,8 @@ export default function LoginForm() {
           type="password"
           {...register("password")}
         />
+        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+
         <Button variant="contained" type="submit">
           {t("login")}
         </Button>
