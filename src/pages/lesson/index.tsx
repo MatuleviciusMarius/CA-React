@@ -6,14 +6,13 @@ import { Sandpack } from "@codesandbox/sandpack-react";
 import { AiHelpModel, getAiHelp, getLessonById } from "../../api/lessons";
 import { Lesson } from "../../types/lesson";
 import { LessonTitle, LessonContent, TaskContent } from "../../types/translations";
-import MonacoCodeEditor from "../../components/MonacoCodeEditor/MonacoCodeEditor";
 import { useEditorContext } from "../../components/MonacoCodeEditor/EditorContext/EditorContext";
-import CodeRenderer from "../../components/MonacoCodeEditor/CodeRenderer/CodeRenderer";
 import { Box, Button, Typography } from "@mui/material";
 import styles from "./Main.module.scss";
 import { useUserData } from "../../hooks/useUserData";
 import { useActiveLanguage } from "../../hooks/useActiveLanguage";
 import AiResponseBox from "../../components/AiResponseBox/AiResponseBox";
+import AiHelp from "../../components/AiHelp/UserActions";
 
 export default function LessonPage() {
   const { state } = useEditorContext();
@@ -114,26 +113,29 @@ export default function LessonPage() {
         )}
       </Box>
       <AiResponseBox message={aiHelpMessage} />
-      <Box>
-        <Sandpack
-          theme={"dark"}
-          template="vanilla"
-          options={{
-            showLineNumbers: true,
-            showTabs: true,
-            showNavigator: true,
-            editorHeight: "60vh",
-            classes: {
-              "sp-preview-actions": "display-none",
-            },
-          }}
-          files={files}
+      {lesson && (
+        <AiHelp
+          code={files["/index.html"].code}
+          isAiResponseLoading={isAiResponseLoading}
+          lessonId={lesson.id}
+          onAskAiHelp={onAskAiHelp}
+          userId={userInfo.id}
         />
-      </Box>
-      {/* <Box padding={1} display={"flex"}>
-        <MonacoCodeEditor />
-        <CodeRenderer lessonId={id!} userId={userInfo.id} onAskAiHelp={onAskAiHelp} srcDoc={srcDoc} isAiResponseLoading={isAiResponseLoading} />
-      </Box> */}
+      )}
+      <Sandpack
+        theme={"dark"}
+        template="vanilla"
+        options={{
+          showLineNumbers: true,
+          showTabs: true,
+          showNavigator: true,
+          editorHeight: "60vh",
+          classes: {
+            "sp-preview-actions": "display-none",
+          },
+        }}
+        files={files}
+      />
     </Box>
   );
 }
