@@ -1,20 +1,12 @@
 import { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import { useNavigate, useParams } from "react-router-dom";
+import { Sandpack } from "@codesandbox/sandpack-react";
 
 import { AiHelpModel, getAiHelp, getLessonById } from "../../api/lessons";
 import { Lesson } from "../../types/lesson";
-import {
-  LessonTitle,
-  LessonContent,
-  TaskContent,
-} from "../../types/translations";
-import MonacoCodeEditor from "../../components/MonacoCodeEditor/MonacoCodeEditor";
-import {
-  EditorProvider,
-  useEditorContext,
-} from "../../components/MonacoCodeEditor/EditorContext/EditorContext";
-import CodeRenderer from "../../components/MonacoCodeEditor/CodeRenderer/CodeRenderer";
+import { LessonTitle, LessonContent, TaskContent } from "../../types/translations";
+import { useEditorContext } from "../../components/MonacoCodeEditor/EditorContext/EditorContext";
 import { Box, Button, Typography } from "@mui/material";
 import styles from "./Main.module.scss";
 import { useUserData } from "../../hooks/useUserData";
@@ -76,13 +68,25 @@ export default function LessonPage() {
     setAiResponseLoading(false);
   };
 
+  const files = {
+    "/index.html": {
+      code: "<!DOCTYPE html>\n<html>\n  <head>\n    <title>My Sandpack</title>\n  </head>\n  <body>\n    <h1>Hello World</h1>\n  </body>\n</html>",
+      active: true,
+    },
+    "/styles.css": {
+      code: "body { font-family: Arial, sans-serif; }",
+    },
+    "/index.js": {
+      code: 'console.log("Hello World");',
+    },
+  };
+
   return (
     <Box minHeight={"100vh"}>
       <Header isUserLoggedIn={!!userInfo.email} name={userInfo.name} />
       <Button variant="outlined" onClick={() => navigate(-1)}>
         {"back"}
       </Button>
-
       <Box height={"100%"} padding={1} className={styles.taskDescription}>
         {lesson && (
           <Typography className={styles.title} fontSize={26}>
@@ -107,19 +111,24 @@ export default function LessonPage() {
           </>
         )}
       </Box>
-
       <AiResponseBox message={aiHelpMessage} />
-
-      <Box padding={1} display={"flex"}>
-        <MonacoCodeEditor />
-        <CodeRenderer
-          lessonId={id!}
-          userId={userInfo.id}
-          onAskAiHelp={onAskAiHelp}
-          srcDoc={srcDoc}
-          isAiResponseLoading={isAiResponseLoading}
+      <Box>
+        <Sandpack
+          theme={"dark"}
+          template="vanilla"
+          options={{
+            showLineNumbers: true,
+            showTabs: true,
+            showNavigator: true,
+            editorHeight: "60vh",
+          }}
+          files={files}
         />
       </Box>
+      {/* <Box padding={1} display={"flex"}>
+        <MonacoCodeEditor />
+        <CodeRenderer lessonId={id!} userId={userInfo.id} onAskAiHelp={onAskAiHelp} srcDoc={srcDoc} isAiResponseLoading={isAiResponseLoading} />
+      </Box> */}
     </Box>
   );
 }
