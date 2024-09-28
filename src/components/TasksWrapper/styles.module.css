@@ -1,7 +1,7 @@
 .main {
   display: grid;
   gap: 1rem;
-  padding: 2rem;
+  padding: 0 2rem;
 }
 
 .continue {
