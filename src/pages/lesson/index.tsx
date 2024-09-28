@@ -76,10 +76,10 @@ export default function LessonPage() {
       active: true,
     },
     "/styles.css": {
-      code: "body { font-family: Arial, sans-serif; }",
+      code: "",
     },
     "/index.js": {
-      code: 'console.log("Hello World");',
+      code: "",
     },
   };
 
@@ -123,6 +123,9 @@ export default function LessonPage() {
             showTabs: true,
             showNavigator: true,
             editorHeight: "60vh",
+            classes: {
+              "sp-preview-actions": "display-none",
+            },
           }}
           files={files}
         />
