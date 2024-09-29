@@ -41,6 +41,11 @@
   gap: 1.2rem;
 }
 
+.description {
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+}
+
 @media only screen and (max-width: 768px) {
   .wrapper {
     grid-template-columns: 1fr;

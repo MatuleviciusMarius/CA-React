@@ -48,7 +48,7 @@ export default function LoginPage() {
         </div>
         <div className={styles.course}>
           <h2 className={styles.title}>{course?.title}</h2>
-          <p>{course?.description}</p>
+          <p className={styles.description}>{course?.description}</p>
           <div className={styles.skillsWrapper}>
             {course?.skills.map((skill) => (
               <Skill title={skill} />

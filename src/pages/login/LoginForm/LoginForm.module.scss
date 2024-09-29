@@ -1,7 +1,8 @@
 .form {
   display: flex;
   flex-direction: column;
-  width: 30rem;
+  width: 100%;
+  padding: 0 2rem;
   gap: 1rem;
 }
 
@@ -9,4 +10,21 @@
   text-align: start;
   color: var(--error);
   font-weight: 500;
+}
+
+.title {
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+.logo {
+  display: none;
+}
+
+@media screen and (max-width: 992px) {
+  .logo {
+    display: inline-block;
+    width: 200px;
+    padding-bottom: 3rem;
+  }
 }

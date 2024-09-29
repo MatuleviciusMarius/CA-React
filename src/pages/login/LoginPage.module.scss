@@ -1,6 +1,29 @@
-.container {
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 1rem;
+}
+
+.first {
+  order: 1;
+}
+
+.second {
+  order: 2;
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: 100vh;
+}
+
+@media screen and (max-width: 992px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .first {
+    order: 2;
+  }
+
+  .second {
+    order: 1;
+  }
 }

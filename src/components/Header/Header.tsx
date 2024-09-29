@@ -7,14 +7,19 @@ import UserAvatar from "../UserAvatar/UserAvatar";
 type HeaderProps = {
   isUserLoggedIn: boolean;
   name: string;
+  isHideLogo?: boolean;
 };
 
-const Header = ({ isUserLoggedIn, name }: HeaderProps) => {
+const Header = ({ isUserLoggedIn, isHideLogo, name }: HeaderProps) => {
   return (
     <header className={styles.main}>
-      <Link to="/">
-        <img src={logo} alt="codeacademy logo" />
-      </Link>
+      {isHideLogo ? (
+        <div></div>
+      ) : (
+        <Link to="/">
+          <img src={logo} alt="codeacademy logo" />
+        </Link>
+      )}
       <div className={styles.utils}>
         <LanguageSelectDropdown />
 
