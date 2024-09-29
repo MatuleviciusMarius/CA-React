@@ -8,6 +8,7 @@ import LessonsWrapper from "../../components/TasksWrapper/LessonsWrapper";
 import Spinner from "../../components/Spinner/Spinner";
 import { getCourseById } from "../../api/courses";
 import { Course } from "../../types/course";
+import Skill from "../../components/Skill/Skill";
 
 export default function LoginPage() {
   const [lessons, setLessons] = useState<Lesson[]>([]);
@@ -48,6 +49,11 @@ export default function LoginPage() {
         <div className={styles.course}>
           <h2 className={styles.title}>{course?.title}</h2>
           <p>{course?.description}</p>
+          <div className={styles.skillsWrapper}>
+            {course?.skills.map((skill) => (
+              <Skill title={skill} />
+            ))}
+          </div>
           <img className={styles.cover} src={course?.imgUrl} />
         </div>
       </div>

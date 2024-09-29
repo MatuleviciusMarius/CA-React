@@ -5,7 +5,11 @@ import { Sandpack } from "@codesandbox/sandpack-react";
 
 import { AiHelpModel, getAiHelp, getLessonById } from "../../api/lessons";
 import { Lesson } from "../../types/lesson";
-import { LessonTitle, LessonContent, TaskContent } from "../../types/translations";
+import {
+  LessonTitle,
+  LessonContent,
+  TaskContent,
+} from "../../types/translations";
 import { useEditorContext } from "../../components/MonacoCodeEditor/EditorContext/EditorContext";
 import { Box, Button, Typography } from "@mui/material";
 import styles from "./Main.module.scss";

@@ -11,7 +11,13 @@ type AIHeplProps = {
   lessonId: string;
 };
 
-const UserActions = ({ isAiResponseLoading, onAskAiHelp, code, userId, lessonId }: AIHeplProps) => {
+const UserActions = ({
+  isAiResponseLoading,
+  onAskAiHelp,
+  code,
+  userId,
+  lessonId,
+}: AIHeplProps) => {
   const { t } = useTranslation();
 
   const handleComplete = () => {
@@ -24,9 +30,17 @@ const UserActions = ({ isAiResponseLoading, onAskAiHelp, code, userId, lessonId 
   };
 
   return (
-    <Box display={"flex"} justifyContent={"flex-end"} gap={1} paddingX={1}>
-      <Button className={styles.aiButton} onClick={onAskAiHelp} variant="outlined">
-        {isAiResponseLoading ? <span className={styles.loader}></span> : <>{t("aiHelp")}</>}
+    <Box display={"flex"} justifyContent={"flex-end"} gap={1} padding={2}>
+      <Button
+        className={styles.aiButton}
+        onClick={onAskAiHelp}
+        variant="outlined"
+      >
+        {isAiResponseLoading ? (
+          <span className={styles.loader}></span>
+        ) : (
+          <>{t("aiHelp")}</>
+        )}
       </Button>
       <Button onClick={handleComplete} variant="contained" color="success">
         {t("complete")}

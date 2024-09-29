@@ -10,4 +10,10 @@
   padding: 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+.continue:hover {
+  scale: 1.02;
+  background-color: rgb(201, 162, 70);
 }

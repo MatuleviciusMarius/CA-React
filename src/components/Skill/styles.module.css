@@ -1,0 +1,9 @@
+.wrapper {
+  background-color: rgb(41, 148, 41);
+  border: 2px solid rgb(93, 93, 93);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  user-select: none;
+}
