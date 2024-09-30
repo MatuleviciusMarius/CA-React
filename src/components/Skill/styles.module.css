@@ -6,4 +6,6 @@
   border-radius: 0.6rem;
   cursor: pointer;
   user-select: none;
+  font-size: 0.7rem;
+  font-weight: 600;
 }
