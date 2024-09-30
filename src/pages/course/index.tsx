@@ -26,7 +26,7 @@ export default function LoginPage() {
   );
 
   const getLesson = async () => {
-    const response = await getCourseById("html_css");
+    const response = await getCourseById(courseId!);
     console.log(response);
     setCourse(response.data.course);
   };

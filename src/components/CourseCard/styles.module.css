@@ -2,17 +2,12 @@
   display: block;
   width: 100%;
   height: 300px;
-  background-color: var(--dark);
   border-radius: 0.5rem;
   overflow: hidden;
   padding: 0.5rem;
   text-decoration: none;
-  color: var(--white);
+  color: var(--dark);
   transition: 0.3s;
-}
-
-.main:hover {
-  background-color: var(--dark-hover);
   box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px,
     rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px,
     rgba(42, 51, 70, 0.04) 0px 2px 2px -1px,
@@ -20,6 +15,10 @@
     rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px,
     rgba(42, 51, 70, 0.03) 0px 10px 10px -5px,
     rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
+}
+
+.main:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .main h2 {
@@ -37,4 +36,12 @@
   width: 100%;
   height: 150px;
   object-fit: cover;
+}
+
+.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

@@ -13,7 +13,7 @@ const CourseCard = ({ id, imgUrl, title, description }: CourseCardProps) => {
     <Link to={`/course/${id}`} className={styles.main}>
       <img src={imgUrl} alt="course photo" />
       <h2>{title}</h2>
-      <p>{description}</p>
+      <p className={styles.description}>{description}</p>
     </Link>
   );
 };
