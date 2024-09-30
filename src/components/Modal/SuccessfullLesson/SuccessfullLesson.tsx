@@ -45,6 +45,14 @@ const SuccessfullLesson = ({
         >
           Close
         </Button>
+        <Button
+          color="success"
+          variant="contained"
+          onClick={() => setModalOpen(false)}
+          sx={{ mt: 2 }}
+        >
+          Continue
+        </Button>
       </div>
     </div>
   );
