@@ -14,10 +14,13 @@
   --dark-hover: rgb(34, 35, 36);
   --white: rgb(239, 233, 233);
   --error: rgb(188, 47, 47);
+  --success: rgb(96, 187, 96);
+  --blue: rgb(56, 56, 179);
 }
 
 body {
   min-height: 100vh;
+  min-width: 380px;
   margin: 0;
   padding: 0;
 }

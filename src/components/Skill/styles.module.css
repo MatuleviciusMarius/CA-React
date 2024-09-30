@@ -1,8 +1,8 @@
 .wrapper {
-  background-color: rgb(41, 148, 41);
+  background-color: var(--success);
   border: 2px solid rgb(93, 93, 93);
   color: white;
-  padding: 0.4rem 1rem;
+  padding: 0.3rem 0.8rem;
   border-radius: 0.6rem;
   cursor: pointer;
   user-select: none;

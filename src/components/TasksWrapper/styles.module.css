@@ -5,12 +5,13 @@
 }
 
 .continue {
-  background-color: rgb(186, 151, 70);
+  background-color: rgb(195, 170, 109);
   color: var(--white);
   padding: 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
   transition: 0.3s;
+  font-weight: 600;
 }
 
 .continue:hover {

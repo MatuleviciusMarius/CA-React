@@ -11,12 +11,13 @@ import {
   TaskContent,
 } from "../../types/translations";
 import { useEditorContext } from "../../components/MonacoCodeEditor/EditorContext/EditorContext";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Modal, Typography } from "@mui/material";
 import styles from "./Main.module.scss";
 import { useUserData } from "../../hooks/useUserData";
 import { useActiveLanguage } from "../../hooks/useActiveLanguage";
 import AiResponseBox from "../../components/AiResponseBox/AiResponseBox";
 import AiHelp from "../../components/AiHelp/UserActions";
+import SuccessfullLesson from "../../components/Modal/SuccessfullLesson/SuccessfullLesson";
 
 export default function LessonPage() {
   const { state } = useEditorContext();
@@ -24,6 +25,7 @@ export default function LessonPage() {
   const [lesson, setLesson] = useState<Lesson>();
   const [aiHelpMessage, setAiHelpMessage] = useState("");
   const [isAiResponseLoading, setAiResponseLoading] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(true);
 
   const { id } = useParams();
   const activeLang = useActiveLanguage();
@@ -140,6 +142,15 @@ export default function LessonPage() {
         }}
         files={files}
       />
+      <Modal
+        sx={{ minWidth: 380 }}
+        open={isModalOpen}
+        onClose={() => setModalOpen(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <SuccessfullLesson atempts={6} setModalOpen={setModalOpen} />
+      </Modal>
     </Box>
   );
 }
