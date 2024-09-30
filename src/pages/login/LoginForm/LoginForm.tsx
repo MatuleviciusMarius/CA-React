@@ -8,7 +8,7 @@ import { UserLogin } from "../../../types/user";
 import { useNavigate } from "react-router-dom";
 import { RoutePaths } from "../../../router/routes";
 import { useState } from "react";
-import logo from "../../../assets/photos/logo.svg";
+// import logo from "../../../assets/photos/logo.svg";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ export default function LoginForm() {
       flexDirection={"column"}
       width={"100%"}
     >
-      <img className={styles.logo} src={logo} />
+      {/* <img className={styles.logo} src={logo} /> */}
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <h3 className={styles.title}>Log In</h3>
         <TextField

@@ -1,3 +1,4 @@
+import { Paper } from "@mui/material";
 import Header from "../../components/Header/Header";
 import Heading from "../../components/Heading/Heading";
 import PageWrapper from "../../components/PageWrapper";
@@ -7,14 +8,12 @@ import styles from "./LoginPage.module.scss";
 export default function LoginPage() {
   return (
     <PageWrapper>
-      <Header isHideLogo={true} />
+      <div className={styles.absoluteWrapper}>
+        <Header />
+      </div>
       <div className={styles.wrapper}>
-        <div className={styles.first}>
-          <Heading />
-        </div>
-        <div className={styles.second}>
-          <LoginForm />
-        </div>
+        <Heading />
+        <LoginForm />
       </div>
     </PageWrapper>
   );

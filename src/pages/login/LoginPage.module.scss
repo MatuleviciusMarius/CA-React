@@ -1,7 +1,16 @@
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 4fr 3fr;
+  min-height: calc(100vh - 1px);
+}
+
+.absoluteWrapper {
+  position: absolute;
+  width: 100%;
   padding-top: 1rem;
+  img {
+    padding-left: 1rem;
+  }
 }
 
 .first {
@@ -17,6 +26,7 @@
 @media screen and (max-width: 992px) {
   .wrapper {
     grid-template-columns: 1fr;
+    padding-top: 4rem;
   }
 
   .first {
