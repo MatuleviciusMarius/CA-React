@@ -25,8 +25,8 @@ const SuccessfullLesson = ({
       </Typography>
 
       <div className={styles.starsWrapper}>
-        {starts.map((star) => (
-          <img className={styles.star} src={star} />
+        {starts.map((star, idx) => (
+          <img className={styles.star} src={star} key={idx} />
         ))}
       </div>
 

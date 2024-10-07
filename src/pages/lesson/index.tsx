@@ -18,6 +18,7 @@ import { useActiveLanguage } from "../../hooks/useActiveLanguage";
 import AiResponseBox from "../../components/AiResponseBox/AiResponseBox";
 import AiHelp from "../../components/AiHelp/UserActions";
 import SuccessfullLesson from "../../components/Modal/SuccessfullLesson/SuccessfullLesson";
+import { createProgress } from "../../api/progress";
 
 export default function LessonPage() {
   const { state } = useEditorContext();
@@ -39,9 +40,33 @@ export default function LessonPage() {
     setLesson(fetchedTask.data.task);
   };
 
+  const retrieveProgress = async (
+    lessonId: string,
+    lessonOrder: number,
+    courseId: string
+  ) => {
+    const fetchedProgress = await createProgress({
+      lessonId,
+      lessonOrder,
+      courseId,
+    });
+
+    if (fetchedProgress.status === 400) {
+      console.log("Huston we have a problem");
+    }
+  };
+
   useEffect(() => {
     retrieveTask(id!);
   }, []);
+
+  useEffect(() => {
+    userInfo.id &&
+      id! &&
+      lesson?.orderId &&
+      lesson?.courseId &&
+      retrieveProgress(id!, lesson!.orderId, lesson!.courseId);
+  }, [id!, lesson?.orderId, lesson?.courseId]);
 
   const lessonTitleKey = `title_${activeLang}` as keyof LessonTitle;
   const lessonContentKey = `lessonContent_${activeLang}` as keyof LessonContent;

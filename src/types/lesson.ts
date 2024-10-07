@@ -4,7 +4,7 @@ export type Lesson = {
   difficulty: string;
   answer: string;
   taskHintContent: string;
-  orderId: string;
+  orderId: number;
   testsId: string;
   durationMins: number;
   lessonContent_en: string;
