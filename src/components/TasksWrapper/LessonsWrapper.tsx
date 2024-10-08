@@ -4,21 +4,30 @@ import LessonCard from "../LessonCard/LessonCard";
 
 type CourseCardProps = {
   lessons: Lesson[];
+  lastCompletedlessonIdx: number;
 };
 
-const LessonsWrapper = ({ lessons }: CourseCardProps) => {
+const LessonsWrapper = ({
+  lessons,
+  lastCompletedlessonIdx,
+}: CourseCardProps) => {
   return (
     <div className={styles.main}>
-      <div
+      {/* <div
         className={styles.continue}
         onClick={() => {
           console.log("xxx");
         }}
       >
         Continue
-      </div>
+      </div> */}
       {lessons?.map((l, idx) => (
-        <LessonCard key={l.id} lesson={l} order={idx + 1} />
+        <LessonCard
+          key={l.id}
+          lesson={l}
+          order={idx + 1}
+          isCompleted={idx < lastCompletedlessonIdx}
+        />
       ))}
     </div>
   );

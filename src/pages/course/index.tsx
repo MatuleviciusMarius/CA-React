@@ -9,13 +9,14 @@ import Spinner from "../../components/Spinner/Spinner";
 import { getCourseById } from "../../api/courses";
 import { Course } from "../../types/course";
 import Skill from "../../components/Skill/Skill";
+import { getLatestCompletedLesson } from "../../api/progress";
 
 export default function LoginPage() {
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [course, setCourse] = useState<Course>();
+  const [lastCompletedlessonIdx, setLastCompletedLessonIdx] = useState(0);
   const { id: courseId } = useParams();
 
-  console.log("course", course);
   const retrieveTasks = async (courseId: string) => {
     const fetchedLessons = await getLessons(courseId);
     setLessons(fetchedLessons.data.tasks);
@@ -25,16 +26,24 @@ export default function LoginPage() {
     JSON.parse(localStorage.getItem("user") || "{}")
   );
 
-  const getLesson = async () => {
+  const getCourse = async () => {
     const response = await getCourseById(courseId!);
-    console.log(response);
     setCourse(response.data.course);
+  };
+
+  const getUserCourseProgress = async () => {
+    const response = await getLatestCompletedLesson({ courseId: course!.id });
+    setLastCompletedLessonIdx(response.data.progress);
   };
 
   useEffect(() => {
     retrieveTasks(courseId!);
-    getLesson();
+    getCourse();
   }, [courseId]);
+
+  useEffect(() => {
+    course && getUserCourseProgress();
+  }, [course]);
 
   return (
     <div className={styles.container}>
@@ -44,7 +53,14 @@ export default function LoginPage() {
         <div>
           <h2 className={styles.mobileTitle}>{course?.title}</h2>
 
-          {lessons ? <LessonsWrapper lessons={lessons} /> : <Spinner />}
+          {lessons ? (
+            <LessonsWrapper
+              lessons={lessons}
+              lastCompletedlessonIdx={lastCompletedlessonIdx}
+            />
+          ) : (
+            <Spinner />
+          )}
         </div>
         <div className={styles.course}>
           <h2 className={styles.title}>{course?.title}</h2>

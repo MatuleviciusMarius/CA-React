@@ -1,6 +1,6 @@
 import baseApi from "./baseApi";
 
-type ProgressBody = {
+type ProgressMutationBody = {
   lessonId: string;
   lessonOrder: number;
   courseId: string;
@@ -10,7 +10,7 @@ export const createProgress = async ({
   lessonId,
   lessonOrder,
   courseId,
-}: ProgressBody) => {
+}: ProgressMutationBody) => {
   const progressBody = {
     lessonId,
     lessonOrder,
@@ -18,5 +18,16 @@ export const createProgress = async ({
   };
 
   const response = await baseApi.post(`/progress`, progressBody);
+  return response;
+};
+
+type ProgressQueryBody = {
+  courseId: string;
+};
+
+export const getLatestCompletedLesson = async ({
+  courseId,
+}: ProgressQueryBody) => {
+  const response = await baseApi.get(`/progress/${courseId}`);
   return response;
 };
