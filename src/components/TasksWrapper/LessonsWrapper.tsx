@@ -27,6 +27,7 @@ const LessonsWrapper = ({
           lesson={l}
           order={idx + 1}
           isCompleted={idx < lastCompletedlessonIdx}
+          isLocked={idx > lastCompletedlessonIdx}
         />
       ))}
     </div>

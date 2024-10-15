@@ -15,6 +15,10 @@
     rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px,
     rgba(42, 51, 70, 0.03) 0px 10px 10px -5px,
     rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
 .main:hover {
@@ -48,6 +52,23 @@
 }
 
 .check {
-  width: 1rem;
-  height: 1rem;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.order {
+  font-weight: 600;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.locked {
+  cursor: not-allowed;
+}
+
+.locked:hover {
+  scale: 1;
 }
