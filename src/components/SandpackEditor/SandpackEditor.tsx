@@ -1,33 +1,22 @@
-import { SandpackCodeEditor, SandpackFileExplorer, SandpackLayout, SandpackPreview, useActiveCode } from "@codesandbox/sandpack-react";
+import { SandpackCodeEditor, SandpackFileExplorer, SandpackLayout, SandpackPreview, SandpackProvider } from "@codesandbox/sandpack-react";
+import { initialFiles } from "./initialFiles";
+import { useState } from "react";
 
 const editorHeight = "60vh";
 
 const SandpackEditor = () => {
-  const { code } = useActiveCode();
+  // const { code } = useActiveCode();
 
   return (
-    <SandpackLayout style={{ height: editorHeight }}>
-      <SandpackFileExplorer autoHiddenFiles style={{ height: editorHeight }} />
-      <SandpackCodeEditor style={{ height: editorHeight }} showTabs showLineNumbers wrapContent closableTabs />
-      <SandpackPreview showNavigator showOpenInCodeSandbox={false} style={{ height: editorHeight }} />
-    </SandpackLayout>
-    // <Sandpack
-    //   theme={"dark"}
-    //   template="vanilla"
-    //   options={{
-    //     showLineNumbers: true,
-    //     showTabs: true,
-    //     showNavigator: true,
-    //     editorHeight: "60vh",
-    //     classes: {
-    //       "sp-preview-actions": "display-none",
-    //     },
-    //   }}
-    //   customSetup={{
-    //     entry: "/index.html",
-    //   }}
-    //   files={files}
-    // />
+    <div>
+      <SandpackProvider template="vanilla" theme={"dark"} files={initialFiles} options={{ autorun: false }}>
+        <SandpackLayout style={{ height: editorHeight }}>
+          <SandpackFileExplorer autoHiddenFiles style={{ height: editorHeight }} />
+          <SandpackCodeEditor initMode="lazy" style={{ height: editorHeight }} showTabs showLineNumbers wrapContent closableTabs />
+          <SandpackPreview showRestartButton showSandpackErrorOverlay showNavigator showOpenInCodeSandbox={false} style={{ height: editorHeight }} />
+        </SandpackLayout>
+      </SandpackProvider>
+    </div>
   );
 };
 

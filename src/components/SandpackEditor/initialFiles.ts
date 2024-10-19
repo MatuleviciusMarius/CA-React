@@ -23,6 +23,6 @@ h1 {
 }`,
   },
   "/index.js": {
-    code: "",
+    code: `import "./styles.css";`,
   },
 };
