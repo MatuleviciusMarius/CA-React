@@ -5,11 +5,7 @@ import { Sandpack, useActiveCode } from "@codesandbox/sandpack-react";
 
 import { AiHelpModel, getAiHelp, getLessonById } from "../../api/lessons";
 import { Lesson } from "../../types/lesson";
-import {
-  LessonTitle,
-  LessonContent,
-  TaskContent,
-} from "../../types/translations";
+import { LessonTitle, LessonContent, TaskContent } from "../../types/translations";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import styles from "./Main.module.scss";
 import { useUserData } from "../../hooks/useUserData";
@@ -18,15 +14,16 @@ import AiResponseBox from "../../components/AiResponseBox/AiResponseBox";
 import AiHelp from "../../components/AiHelp/UserActions";
 import SuccessfullLesson from "../../components/Modal/SuccessfullLesson/SuccessfullLesson";
 import { createProgress } from "../../api/progress";
+import SandpackEditor from "../../components/SandpackEditor/SandpackEditor";
 
 export default function LessonPage() {
   const [lesson, setLesson] = useState<Lesson>();
   const [aiHelpMessage, setAiHelpMessage] = useState("");
   const [isAiResponseLoading, setAiResponseLoading] = useState(false);
-  const [isModalOpen, setModalOpen] = useState(true);
-  
+  const [isModalOpen, setModalOpen] = useState(false);
+
   const { id } = useParams();
-  const { code } = useActiveCode()
+  // const { code } = useActiveCode()
   const activeLang = useActiveLanguage();
   const navigate = useNavigate();
 
@@ -38,11 +35,7 @@ export default function LessonPage() {
     setLesson(fetchedTask.data.task);
   };
 
-  const retrieveProgress = async (
-    lessonId: string,
-    lessonOrder: number,
-    courseId: string
-  ) => {
+  const retrieveProgress = async (lessonId: string, lessonOrder: number, courseId: string) => {
     const fetchedProgress = await createProgress({
       lessonId,
       lessonOrder,
@@ -59,31 +52,27 @@ export default function LessonPage() {
   }, []);
 
   useEffect(() => {
-    userInfo.id &&
-      id! &&
-      lesson?.orderId &&
-      lesson?.courseId &&
-      retrieveProgress(id!, lesson!.orderId, lesson!.courseId);
+    userInfo.id && id! && lesson?.orderId && lesson?.courseId && retrieveProgress(id!, lesson!.orderId, lesson!.courseId);
   }, [id, lesson?.orderId, lesson?.courseId]);
 
   const lessonTitleKey = `title_${activeLang}` as keyof LessonTitle;
   const lessonContentKey = `lessonContent_${activeLang}` as keyof LessonContent;
   const lessonTaskKey = `taskContent_${activeLang}` as keyof TaskContent;
 
-//   const srcDoc = `
-//   <!DOCTYPE html>
-//   <html lang="en">
-//   <head>
-//     <meta charset="UTF-8">
-//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//     <style>${state.cssContent}</style>
-//   </head>
-//   <body>
-//     ${state.htmlContent}
-//     <script>${state.jsContent}</script>
-//   </body>
-//   </html>
-// `;
+  //   const srcDoc = `
+  //   <!DOCTYPE html>
+  //   <html lang="en">
+  //   <head>
+  //     <meta charset="UTF-8">
+  //     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  //     <style>${state.cssContent}</style>
+  //   </head>
+  //   <body>
+  //     ${state.htmlContent}
+  //     <script>${state.jsContent}</script>
+  //   </body>
+  //   </html>
+  // `;
 
   const onAskAiHelp = async () => {
     setAiResponseLoading(true);
@@ -100,18 +89,34 @@ export default function LessonPage() {
 
   const files = {
     "/index.html": {
-      code: "<!DOCTYPE html>\n<html>\n  <head>\n    <title>My Sandpack</title>\n  </head>\n  <body>\n    <h1>Hello World</h1>\n  </body>\n</html>",
+      code: `<!DOCTYPE html>
+  <html>
+    <head>
+      <title>My Sandpack</title>
+      <link rel="stylesheet" type="text/css" href="/styles.css">
+    </head>
+    <body>
+      <h1>Hello World</h1>
+    </body>
+  </html>`,
       active: true,
     },
     "/styles.css": {
-      code: "",
+      code: `body {
+    background-color: lightblue;
+  }
+  
+  h1 {
+    color: navy;
+    text-align: center;
+  }`,
     },
     "/index.js": {
       code: "",
     },
   };
   console.log(files);
-  
+
   return (
     <Box minHeight={"100vh"}>
       <Header isUserLoggedIn={!!userInfo.email} name={userInfo.name} />
@@ -152,23 +157,7 @@ export default function LessonPage() {
           userId={userInfo.id}
         />
       )}
-      <Sandpack
-        theme={"dark"}
-        template="vanilla"
-        options={{
-          showLineNumbers: true,
-          showTabs: true,
-          showNavigator: true,
-          editorHeight: "60vh",
-          classes: {
-            "sp-preview-actions": "display-none",
-          },
-        }}
-        customSetup={{
-          entry: "/index.html",
-        }}
-        files={files}
-      />
+      <SandpackEditor />
       <Modal
         sx={{ minWidth: 380 }}
         open={isModalOpen}
