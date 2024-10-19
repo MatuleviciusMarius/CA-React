@@ -1,15 +1,6 @@
 export const initialFiles = {
   "/index.html": {
-    code: `<!DOCTYPE html>
-<html>
-  <head>
-    <title>My Sandpack</title>
-    <link rel="stylesheet" type="text/css" href="/styles.css">
-  </head>
-  <body>
-    <h1>Hello World</h1>
-  </body>
-</html>`,
+    code: `<h1>Hello World</h1>`,
     active: true,
   },
   "/styles.css": {
@@ -22,7 +13,11 @@ h1 {
   text-align: center;
 }`,
   },
+  "/script.js": {
+    code: `console.log("Hello, world!");`,
+  },
   "/index.js": {
-    code: `import "./styles.css";`,
+    code: `import "./styles.css"; import "./script.js";`,
+    hidden: true,
   },
 };
