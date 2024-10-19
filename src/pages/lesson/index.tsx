@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import { useNavigate, useParams } from "react-router-dom";
-import { Sandpack } from "@codesandbox/sandpack-react";
+import { Sandpack, useActiveCode } from "@codesandbox/sandpack-react";
 
 import { AiHelpModel, getAiHelp, getLessonById } from "../../api/lessons";
 import { Lesson } from "../../types/lesson";
@@ -10,7 +10,6 @@ import {
   LessonContent,
   TaskContent,
 } from "../../types/translations";
-import { useEditorContext } from "../../components/MonacoCodeEditor/EditorContext/EditorContext";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import styles from "./Main.module.scss";
 import { useUserData } from "../../hooks/useUserData";
@@ -21,14 +20,13 @@ import SuccessfullLesson from "../../components/Modal/SuccessfullLesson/Successf
 import { createProgress } from "../../api/progress";
 
 export default function LessonPage() {
-  const { state } = useEditorContext();
-
   const [lesson, setLesson] = useState<Lesson>();
   const [aiHelpMessage, setAiHelpMessage] = useState("");
   const [isAiResponseLoading, setAiResponseLoading] = useState(false);
   const [isModalOpen, setModalOpen] = useState(true);
-
+  
   const { id } = useParams();
+  const { code } = useActiveCode()
   const activeLang = useActiveLanguage();
   const navigate = useNavigate();
 
@@ -66,26 +64,26 @@ export default function LessonPage() {
       lesson?.orderId &&
       lesson?.courseId &&
       retrieveProgress(id!, lesson!.orderId, lesson!.courseId);
-  }, [id!, lesson?.orderId, lesson?.courseId]);
+  }, [id, lesson?.orderId, lesson?.courseId]);
 
   const lessonTitleKey = `title_${activeLang}` as keyof LessonTitle;
   const lessonContentKey = `lessonContent_${activeLang}` as keyof LessonContent;
   const lessonTaskKey = `taskContent_${activeLang}` as keyof TaskContent;
 
-  const srcDoc = `
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>${state.cssContent}</style>
-  </head>
-  <body>
-    ${state.htmlContent}
-    <script>${state.jsContent}</script>
-  </body>
-  </html>
-`;
+//   const srcDoc = `
+//   <!DOCTYPE html>
+//   <html lang="en">
+//   <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <style>${state.cssContent}</style>
+//   </head>
+//   <body>
+//     ${state.htmlContent}
+//     <script>${state.jsContent}</script>
+//   </body>
+//   </html>
+// `;
 
   const onAskAiHelp = async () => {
     setAiResponseLoading(true);
@@ -112,7 +110,8 @@ export default function LessonPage() {
       code: "",
     },
   };
-
+  console.log(files);
+  
   return (
     <Box minHeight={"100vh"}>
       <Header isUserLoggedIn={!!userInfo.email} name={userInfo.name} />
@@ -164,6 +163,9 @@ export default function LessonPage() {
           classes: {
             "sp-preview-actions": "display-none",
           },
+        }}
+        customSetup={{
+          entry: "/index.html",
         }}
         files={files}
       />
