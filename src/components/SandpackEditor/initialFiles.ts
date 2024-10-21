@@ -1,6 +1,17 @@
 export const initialFiles = {
   "/index.html": {
-    code: `<h1>Hello World</h1>`,
+    code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Hello World</h1>
+  <script src="script.js"></script>
+</body>
+</html>`,
     active: true,
   },
   "/styles.css": {
@@ -17,7 +28,7 @@ h1 {
     code: `console.log("Hello, world!");`,
   },
   "/index.js": {
-    code: `import "./styles.css"; import "./script.js";`,
+    code: `import "./script.js";`,
     hidden: true,
   },
 };
