@@ -16,7 +16,7 @@ import { createProgress } from "../../api/progress";
 import SandpackEditor from "../../components/SandpackEditor/SandpackEditor";
 import { SandpackProvider } from "@codesandbox/sandpack-react";
 import { initialFiles } from "../../components/SandpackEditor/initialFiles";
-import { Code, useCurrentCode } from "../../components/SandpackEditor/hooks/useCurrentCode";
+import { Code } from "../../components/SandpackEditor/hooks/useCurrentCode";
 
 export default function LessonPage() {
   const [lesson, setLesson] = useState<Lesson>();
