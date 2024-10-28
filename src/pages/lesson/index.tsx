@@ -10,12 +10,13 @@ import styles from "./Main.module.scss";
 import { useUserData } from "../../hooks/useUserData";
 import { useActiveLanguage } from "../../hooks/useActiveLanguage";
 import AiResponseBox from "../../components/AiResponseBox/AiResponseBox";
-import AiHelp from "../../components/AiHelp/UserActions";
+import AiHelp from "../../components/UserActions/UserActions";
 import SuccessfullLesson from "../../components/Modal/SuccessfullLesson/SuccessfullLesson";
 import { createProgress } from "../../api/progress";
 import SandpackEditor from "../../components/SandpackEditor/SandpackEditor";
 import { SandpackProvider } from "@codesandbox/sandpack-react";
 import { initialFiles } from "../../components/SandpackEditor/initialFiles";
+import { Code, useCurrentCode } from "../../components/SandpackEditor/hooks/useCurrentCode";
 
 export default function LessonPage() {
   const [lesson, setLesson] = useState<Lesson>();
@@ -24,7 +25,6 @@ export default function LessonPage() {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const { id } = useParams();
-  // const { code } = useActiveCode()
   const activeLang = useActiveLanguage();
   const navigate = useNavigate();
 
@@ -32,7 +32,6 @@ export default function LessonPage() {
 
   const retrieveTask = async (id: string) => {
     const fetchedTask = await getLessonById(id);
-    console.log(fetchedTask.data.task);
     setLesson(fetchedTask.data.task);
   };
 
@@ -60,25 +59,10 @@ export default function LessonPage() {
   const lessonContentKey = `lessonContent_${activeLang}` as keyof LessonContent;
   const lessonTaskKey = `taskContent_${activeLang}` as keyof TaskContent;
 
-  //   const srcDoc = `
-  //   <!DOCTYPE html>
-  //   <html lang="en">
-  //   <head>
-  //     <meta charset="UTF-8">
-  //     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  //     <style>${state.cssContent}</style>
-  //   </head>
-  //   <body>
-  //     ${state.htmlContent}
-  //     <script>${state.jsContent}</script>
-  //   </body>
-  //   </html>
-  // `;
-
-  const onAskAiHelp = async () => {
+  const onAskAiHelp = async (code: Code) => {
     setAiResponseLoading(true);
     const body: AiHelpModel = {
-      code: srcDoc,
+      code,
       lessonId: id!,
     };
 
@@ -120,15 +104,7 @@ export default function LessonPage() {
           )}
         </Box>
         <AiResponseBox message={aiHelpMessage} />
-        {lesson && (
-          <AiHelp
-            // code={files["/index.html"].code}
-            isAiResponseLoading={isAiResponseLoading}
-            lessonId={lesson.id}
-            onAskAiHelp={onAskAiHelp}
-            userId={userInfo.id}
-          />
-        )}
+        {lesson && <AiHelp isAiResponseLoading={isAiResponseLoading} lessonId={lesson.id} onAskAiHelp={onAskAiHelp} userId={userInfo.id} />}
         <SandpackEditor />
         <Modal
           sx={{ minWidth: 380 }}

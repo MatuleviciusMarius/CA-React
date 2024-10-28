@@ -27,25 +27,17 @@ export default function LoginForm() {
       }
 
       if (response.status === 401) {
-        console.log("asas");
         setErrorMessage("Inserted bad email or password");
       }
     } catch (e: any) {
       if (e.response.status === 401) {
-        console.log("asas");
         setErrorMessage("Inserted bad email or password");
       }
     }
   }
 
   return (
-    <Box
-      display={"flex"}
-      alignItems={"center"}
-      justifyContent={"center"}
-      flexDirection={"column"}
-      width={"100%"}
-    >
+    <Box display={"flex"} alignItems={"center"} justifyContent={"center"} flexDirection={"column"} width={"100%"}>
       {/* <img className={styles.logo} src={logo} /> */}
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <h3 className={styles.title}>Log In</h3>
@@ -62,13 +54,7 @@ export default function LoginForm() {
             },
           })}
         />
-        <TextField
-          size="medium"
-          label={t("password")}
-          id="password"
-          type="password"
-          {...register("password")}
-        />
+        <TextField size="medium" label={t("password")} id="password" type="password" {...register("password")} />
         {errorMessage && <p className={styles.error}>{errorMessage}</p>}
 
         <Button variant="contained" type="submit">

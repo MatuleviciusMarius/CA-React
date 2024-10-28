@@ -1,3 +1,4 @@
+import { Code } from "../components/SandpackEditor/hooks/useCurrentCode";
 import { Lesson } from "../types/lesson";
 import baseApi from "./baseApi";
 
@@ -25,7 +26,7 @@ export const getLessonByLevel = async (level: number) => {
 };
 
 export type CompleteLessonModel = {
-  code: string;
+  code: Code;
   userId: string;
 };
 
@@ -35,7 +36,7 @@ export const completeLesson = async (lessonId: string, model: CompleteLessonMode
 };
 
 export type AiHelpModel = {
-  code: string;
+  code: Code;
   lessonId: string;
 };
 
