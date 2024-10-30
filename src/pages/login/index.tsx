@@ -1,4 +1,3 @@
-import { Paper } from "@mui/material";
 import Header from "../../components/Header/Header";
 import Heading from "../../components/Heading/Heading";
 import PageWrapper from "../../components/PageWrapper";
@@ -9,7 +8,7 @@ export default function LoginPage() {
   return (
     <PageWrapper>
       <div className={styles.absoluteWrapper}>
-        <Header />
+        <Header  />
       </div>
       <div className={styles.wrapper}>
         <Heading />
