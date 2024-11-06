@@ -21,6 +21,9 @@ export const languagesTitle: Record<SupportedLanguageKeys, string> = {
 const resources = {
   en: {
     translation: {
+      name: "Name",
+      surname: "Surname",
+      occupation: "Occupation",
       courses: "Courses",
       password: "Password",
       email: "Email",
@@ -30,11 +33,15 @@ const resources = {
       aiHelp: "Ask AI for a help",
       complete: "Complete",
       back: "Back",
+      phoneNumber: "Phone number",
     },
   },
 
   lt: {
     translation: {
+      name: "Vardas",
+      surname: "Pavardė",
+      occupation: "Profesija",
       courses: "Kursai",
       password: "Slaptažodis",
       email: "El. paštas",
@@ -44,6 +51,7 @@ const resources = {
       aiHelp: "DI Pagalba",
       complete: "Baigti",
       back: "Atgal",
+      phoneNumber: "Telefono numeris",
     },
   },
 };

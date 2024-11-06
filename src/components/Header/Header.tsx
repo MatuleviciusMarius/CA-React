@@ -6,7 +6,7 @@ import UserAvatar from "../UserAvatar/UserAvatar";
 
 type HeaderProps = {
   isUserLoggedIn: boolean;
-  name: string;
+  name?: string;
   isHideLogo?: boolean;
 };
 
@@ -23,7 +23,7 @@ const Header = ({ isUserLoggedIn, isHideLogo, name }: HeaderProps) => {
       <div className={styles.utils}>
         <LanguageSelectDropdown />
 
-        {isUserLoggedIn && <UserAvatar name={name} />}
+        {isUserLoggedIn && <UserAvatar name={name!} />}
       </div>
     </header>
   );

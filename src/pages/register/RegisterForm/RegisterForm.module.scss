@@ -3,4 +3,15 @@
   flex-direction: column;
   width: 30rem;
   gap: 1rem;
+  padding: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+}
+
+@media (max-height: 960px) {
+  .form {
+    margin-top: 4rem;
+  }
 }

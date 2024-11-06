@@ -60,8 +60,9 @@ export default function LoginForm() {
       justifyContent={"center"}
       flexDirection={"column"}
     >
-      <h1>{t("register")}</h1>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+        <h1 className={styles.title}>{t("register")}</h1>
+
         <TextField
           size="medium"
           label={t("name")}
