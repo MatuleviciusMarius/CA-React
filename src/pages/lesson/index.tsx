@@ -10,7 +10,7 @@ import styles from "./Main.module.scss";
 import { useUserData } from "../../hooks/useUserData";
 import { useActiveLanguage } from "../../hooks/useActiveLanguage";
 import AiResponseBox from "../../components/AiResponseBox/AiResponseBox";
-import AiHelp from "../../components/UserActions/UserActions";
+import UserActions from "../../components/UserActions/UserActions";
 import SuccessfullLesson from "../../components/Modal/SuccessfullLesson/SuccessfullLesson";
 import { createProgress } from "../../api/progress";
 import SandpackEditor from "../../components/SandpackEditor/SandpackEditor";
@@ -104,7 +104,7 @@ export default function LessonPage() {
           )}
         </Box>
         <AiResponseBox message={aiHelpMessage} />
-        {lesson && <AiHelp isAiResponseLoading={isAiResponseLoading} lessonId={lesson.id} onAskAiHelp={onAskAiHelp} userId={userInfo.id} />}
+        {lesson && <UserActions isAiResponseLoading={isAiResponseLoading} lessonId={lesson.id} onAskAiHelp={onAskAiHelp} userId={userInfo.id} />}
         <SandpackEditor />
         <Modal
           sx={{ minWidth: 380 }}

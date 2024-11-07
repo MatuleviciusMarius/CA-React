@@ -29,6 +29,7 @@ export default function LoginForm() {
       if (response.status === 401) {
         setErrorMessage("Inserted bad email or password");
       }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       if (e.response.status === 401) {
         setErrorMessage("Inserted bad email or password");
