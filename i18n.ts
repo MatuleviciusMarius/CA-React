@@ -34,6 +34,8 @@ const resources = {
       complete: "Complete",
       back: "Back",
       phoneNumber: "Phone number",
+      select_country: "Select country",
+      date_of_birth: "Date of birth",
     },
   },
 
@@ -52,6 +54,8 @@ const resources = {
       complete: "Baigti",
       back: "Atgal",
       phoneNumber: "Telefono numeris",
+      select_country: "Pasirinkite šalį",
+      date_of_birth: "Gimimo data",
     },
   },
 };

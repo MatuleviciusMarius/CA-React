@@ -1,0 +1,7 @@
+.error {
+  color: var(--error);
+  font-weight: 600 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
