@@ -5,9 +5,9 @@
 .paper {
   margin: 1rem;
   display: flex;
-  align-items: center;
   display: flex;
   justify-content: center;
+  padding-top: 10rem;
 }
 
 .paper img {
