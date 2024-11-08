@@ -30,10 +30,22 @@ export type CompleteLessonModel = {
   userId: string;
 };
 
+type CompleteLessonResponse = {
+  message: string;
+  results: {
+    [key: string]: boolean;
+  }
+};
+
 export const completeLesson = async (lessonId: string, model: CompleteLessonModel) => {
-  const response = await baseApi.post(`/lessons/${lessonId}/complete`, model);
+  const response = await baseApi.post<CompleteLessonResponse>(`/lessons/${lessonId}/complete`, model);
   return response;
 };
+
+export const getTestNames = async (lessonId: string) => {
+  const response = await baseApi.get<{ testNames: string[] }>(`/lessons/${lessonId}/testsNames`);
+  return response;
+}
 
 export type AiHelpModel = {
   code: Code;
