@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import { logout } from "../../helpers/login";
 import { useNavigate } from "react-router-dom";
 import { RoutePaths } from "../../router/routes";
+import { useTranslation } from "react-i18next";
 
 type UserAvatarProps = {
   name: string;
@@ -10,6 +11,7 @@ type UserAvatarProps = {
 
 const UserAvatar = ({ name }: UserAvatarProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [isShowModal, setShowModal] = useState(false);
   return (
@@ -33,7 +35,7 @@ const UserAvatar = ({ name }: UserAvatarProps) => {
               navigate(RoutePaths.login);
             }}
           >
-            Sign out
+            {t("sign_out")}
           </button>
         </div>
       )}

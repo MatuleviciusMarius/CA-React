@@ -43,6 +43,7 @@ const resources = {
       dateOfBirth_missing: "Date of birth is missing",
       occupation_missing: "Occupation is missing",
       phoneNumber_missing: "Phone number is missing",
+      sign_out: "Sign Out",
     },
   },
 
@@ -70,6 +71,7 @@ const resources = {
       dateOfBirth_missing: "Įrašykite gimimo datą",
       occupation_missing: "Įrašykite savo profesiją",
       phoneNumber_missing: "Įrašykite savo telefono numerį",
+      sign_out: "Atsijungti",
     },
   },
 };
