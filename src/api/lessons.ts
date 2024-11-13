@@ -42,8 +42,16 @@ export const completeLesson = async (lessonId: string, model: CompleteLessonMode
   return response;
 };
 
+type TestNamesResponse = {
+  testNames: {
+    [key: string]: {
+      en: string;
+    }
+  }
+};
+
 export const getTestNames = async (lessonId: string) => {
-  const response = await baseApi.get<{ testNames: string[] }>(`/lessons/${lessonId}/testsNames`);
+  const response = await baseApi.get<TestNamesResponse>(`/lessons/${lessonId}/testsNames`);
   return response;
 }
 
