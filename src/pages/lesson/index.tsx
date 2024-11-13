@@ -91,9 +91,9 @@ export default function LessonPage() {
         <Button variant="outlined" onClick={() => navigate(-1)}>
           {"back"}
         </Button>
-        <Box height={"100%"} padding={1} className={styles.taskDescription}>
+        <Box height={"100%"} padding={3} className={styles.taskDescription}>
           {lesson && (
-            <Typography className={styles.title} fontSize={26}>
+            <Typography className={styles.title} fontSize={36}>
               {lesson[lessonTitleKey]}
             </Typography>
           )}
