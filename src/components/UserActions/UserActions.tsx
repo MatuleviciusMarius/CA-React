@@ -22,7 +22,13 @@ const UserActions = ({
   const code = useCurrentCode();
 
   return (
-    <Box display={"flex"} justifyContent={"flex-end"} gap={1} paddingBottom={2}>
+    <Box
+      display={"flex"}
+      justifyContent={"flex-end"}
+      gap={1}
+      paddingBottom={2}
+      paddingRight={2}
+    >
       <Button
         className={styles.aiButton}
         onClick={() => onAskAiHelp(code)}
