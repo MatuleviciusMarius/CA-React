@@ -56,6 +56,7 @@ const Complete = ({ lessonId, userId }: CompleteProps) => {
   };
 
   const handleComplete = async () => {
+    setCompleteResults(null);
     setIsModalOpen(true);
     const body: CompleteLessonModel = {
       userId,
