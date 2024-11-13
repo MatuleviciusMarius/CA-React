@@ -11,17 +11,30 @@ type AIHelpProps = {
   lessonId: string;
 };
 
-const UserActions = ({ isAiResponseLoading, userId, lessonId, onAskAiHelp }: AIHelpProps) => {
+const UserActions = ({
+  isAiResponseLoading,
+  userId,
+  lessonId,
+  onAskAiHelp,
+}: AIHelpProps) => {
   const { t } = useTranslation();
 
   const code = useCurrentCode();
 
   return (
-    <Box display={"flex"} justifyContent={"flex-end"} gap={1} padding={2}>
-      <Button className={styles.aiButton} onClick={() => onAskAiHelp(code)} variant="outlined">
-        {isAiResponseLoading ? <span className={styles.loader}></span> : <>{t("aiHelp")}</>}
+    <Box display={"flex"} justifyContent={"flex-end"} gap={1} paddingBottom={2}>
+      <Button
+        className={styles.aiButton}
+        onClick={() => onAskAiHelp(code)}
+        variant="outlined"
+      >
+        {isAiResponseLoading ? (
+          <span className={styles.loader}></span>
+        ) : (
+          <>{t("aiHelp")}</>
+        )}
       </Button>
-      <Complete lessonId={lessonId} userId={userId}  />
+      <Complete lessonId={lessonId} userId={userId} />
     </Box>
   );
 };

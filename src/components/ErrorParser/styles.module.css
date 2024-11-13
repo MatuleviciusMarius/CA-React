@@ -1,7 +1,11 @@
 .error {
   color: var(--error);
-  font-weight: 600 !important;
+  font-weight: 500;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+}
+
+.error div {
+  font-weight: 500;
 }
