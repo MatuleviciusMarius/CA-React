@@ -9,6 +9,7 @@ import {
 import {
   completeLesson,
   CompleteLessonModel,
+  CompleteLessonResponse,
   getTestNames,
 } from "../../../api/lessons";
 import { useCurrentCode } from "../../SandpackEditor/hooks/useCurrentCode";
@@ -23,6 +24,7 @@ type CompleteProps = {
 const Complete = ({ lessonId, userId }: CompleteProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [testNames, setTestNames] = useState<string[]>([]);
+  const [completeResults, setCompleteResults] = useState<CompleteLessonResponse | null>(null)
 
   const { t } = useTranslation();
   const code = useCurrentCode();
@@ -30,9 +32,9 @@ const Complete = ({ lessonId, userId }: CompleteProps) => {
   const fetchTestNames = async () => {
     try {
       const res = await getTestNames(lessonId);
-      console.log(res.data.testNames);
+      console.log(res.data);
 
-      setTestNames(res.data.testNames);
+      setTestNames(res.data.map((test) => test.en));
     } catch (err) {
       console.log(err);
     }
@@ -40,7 +42,7 @@ const Complete = ({ lessonId, userId }: CompleteProps) => {
 
   useEffect(() => {
     fetchTestNames();
-  }, [lessonId]);
+  }, []);
 
   const style = {
     position: "absolute",
@@ -61,7 +63,7 @@ const Complete = ({ lessonId, userId }: CompleteProps) => {
     };
 
     const res = await completeLesson(lessonId, body);
-    console.log(res.data);
+    setCompleteResults(res.data);
   };
 
   return (
@@ -80,11 +82,21 @@ const Complete = ({ lessonId, userId }: CompleteProps) => {
             Running tests:
           </Typography>
           <List>
-            {testNames?.map((name, i) => (
-              <Typography key={i}>
-                <CircularProgress size={15} /> {name}
-              </Typography>
-            ))}
+            {
+              completeResults ? (
+                completeResults.map((result, i) => (
+                  <Typography key={i}>
+                    {result.result ? "✅" : "❌"} {result.name.en} 
+                  </Typography>
+                ))
+              ) : (
+                testNames?.map((name, i) => (
+                  <Typography key={i}>
+                    <CircularProgress size={15} /> {name}
+                  </Typography>
+                ))
+              )
+            }
           </List>
         </Box>
       </Modal>
