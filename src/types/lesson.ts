@@ -18,6 +18,9 @@ export type Lesson = {
   initialHtmlCode: string;
   initialCssCode: string;
   initialJsCode: string;
+  isHtmlEditor: boolean;
+  isCssEditor: boolean;
+  isJsEditor: boolean;
 
   // aiAssistsCount: number;
   // submitsCount: number;
