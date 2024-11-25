@@ -1,14 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Header from "../../components/Header/Header";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { AiHelpModel, getAiHelp, getLessonById } from "../../api/lessons";
 import { Lesson } from "../../types/lesson";
-import {
-  LessonTitle,
-  LessonContent,
-  TaskContent,
-} from "../../types/translations";
+import { LessonTitle, LessonContent, TaskContent } from "../../types/translations";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import styles from "./Main.module.scss";
 import { useUserData } from "../../hooks/useUserData";
@@ -19,7 +15,6 @@ import SuccessfullLesson from "../../components/Modal/SuccessfullLesson/Successf
 import { createProgress } from "../../api/progress";
 import SandpackEditor from "../../components/SandpackEditor/SandpackEditor";
 import { SandpackProvider } from "@codesandbox/sandpack-react";
-import { initialFiles } from "../../components/SandpackEditor/initialFiles";
 import { Code } from "../../components/SandpackEditor/hooks/useCurrentCode";
 
 export default function LessonPage() {
@@ -39,11 +34,7 @@ export default function LessonPage() {
     setLesson(fetchedTask.data.task);
   };
 
-  const retrieveProgress = async (
-    lessonId: string,
-    lessonOrder: number,
-    courseId: string
-  ) => {
+  const retrieveProgress = async (lessonId: string, lessonOrder: number, courseId: string) => {
     const fetchedProgress = await createProgress({
       lessonId,
       lessonOrder,
@@ -60,11 +51,7 @@ export default function LessonPage() {
   }, []);
 
   useEffect(() => {
-    userInfo.id &&
-      id! &&
-      lesson?.orderId &&
-      lesson?.courseId &&
-      retrieveProgress(id!, lesson!.orderId, lesson!.courseId);
+    userInfo.id && id! && lesson?.orderId && lesson?.courseId && retrieveProgress(id!, lesson!.orderId, lesson!.courseId);
   }, [id, lesson?.orderId, lesson?.courseId]);
 
   const lessonTitleKey = `title_${activeLang}` as keyof LessonTitle;
@@ -84,8 +71,37 @@ export default function LessonPage() {
     setAiResponseLoading(false);
   };
 
+  const initialFiles = useMemo(
+    () => ({
+      "/script.js": {
+        code: lesson?.initialJsCode || "",
+        hidden: !lesson?.isJsEditor,
+      },
+      "/index.html": {
+        code: lesson?.initialHtmlCode || "",
+        hidden: !lesson?.isHtmlEditor,
+      },
+      "/styles.css": {
+        code: lesson?.initialCssCode || "",
+        hidden: !lesson?.isCssEditor,
+      },
+      "/index.js": {
+        code: `import "./script.js";`,
+        hidden: true,
+      },
+    }),
+    [lesson],
+  );
+
   return (
-    <SandpackProvider template="vanilla" theme={"dark"} files={initialFiles}>
+    <SandpackProvider
+      template="vanilla"
+      theme={"dark"}
+      options={{
+        activeFile: "/index.html",
+      }}
+      files={initialFiles}
+    >
       <Box minHeight={"100vh"}>
         <Header isUserLoggedIn={!!userInfo.email} name={userInfo.name} />
         <Button variant="outlined" onClick={() => navigate(-1)}>
@@ -116,22 +132,9 @@ export default function LessonPage() {
           )}
         </Box>
         <AiResponseBox message={aiHelpMessage} />
-        {lesson && (
-          <UserActions
-            isAiResponseLoading={isAiResponseLoading}
-            lessonId={lesson.id}
-            onAskAiHelp={onAskAiHelp}
-            userId={userInfo.id}
-          />
-        )}
+        {lesson && <UserActions isAiResponseLoading={isAiResponseLoading} lessonId={lesson.id} onAskAiHelp={onAskAiHelp} userId={userInfo.id} />}
         <SandpackEditor />
-        <Modal
-          sx={{ minWidth: 380 }}
-          open={isModalOpen}
-          onClose={() => setModalOpen(false)}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
+        <Modal sx={{ minWidth: 380 }} open={isModalOpen} onClose={() => setModalOpen(false)} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
           <SuccessfullLesson atempts={6} setModalOpen={setModalOpen} />
         </Modal>
       </Box>
