@@ -7,7 +7,9 @@ export type LessonsResponse = {
 };
 
 export const getLessons = async (courseId: string) => {
-  const response = await baseApi.get<LessonsResponse>(`/lessons/course/${courseId}`);
+  const response = await baseApi.get<LessonsResponse>(
+    `/lessons/course/${courseId}`
+  );
   return response;
 };
 
@@ -28,30 +30,40 @@ export const getLessonByLevel = async (level: number) => {
 export type CompleteLessonModel = {
   code: Code;
   userId: string;
+  lessonId: string;
+  courseId: string;
 };
 
 export type CompleteLessonResponse = {
   name: {
     en: string;
     lt: string;
-  }
+  };
   result: string;
 }[];
 
-export const completeLesson = async (lessonId: string, model: CompleteLessonModel) => {
-  const response = await baseApi.post<CompleteLessonResponse>(`/lessons/${lessonId}/complete`, model);
+export const completeLesson = async (
+  lessonId: string,
+  model: CompleteLessonModel
+) => {
+  const response = await baseApi.post<CompleteLessonResponse>(
+    `/lessons/${lessonId}/complete`,
+    model
+  );
   return response;
 };
 
 export type TestNamesResponse = {
-      en: string;
-      lt: string;
+  en: string;
+  lt: string;
 }[];
 
 export const getTestNames = async (lessonId: string) => {
-  const response = await baseApi.get<TestNamesResponse>(`/lessons/${lessonId}/testsNames`);
+  const response = await baseApi.get<TestNamesResponse>(
+    `/lessons/${lessonId}/testsNames`
+  );
   return response;
-}
+};
 
 export type AiHelpModel = {
   code: Code;
@@ -63,6 +75,9 @@ export type AiHelpResponse = {
 };
 
 export const getAiHelp = async (lessonId: string, body: AiHelpModel) => {
-  const response = await baseApi.post<AiHelpResponse>(`/openai/${lessonId}`, body);
+  const response = await baseApi.post<AiHelpResponse>(
+    `/openai/${lessonId}`,
+    body
+  );
   return response.data.data;
 };

@@ -9,12 +9,14 @@ type AIHelpProps = {
   isAiResponseLoading: boolean;
   userId: string;
   lessonId: string;
+  courseId: string;
 };
 
 const UserActions = ({
   isAiResponseLoading,
   userId,
   lessonId,
+  courseId,
   onAskAiHelp,
 }: AIHelpProps) => {
   const { t } = useTranslation();
@@ -40,7 +42,7 @@ const UserActions = ({
           <>{t("aiHelp")}</>
         )}
       </Button>
-      <Complete lessonId={lessonId} userId={userId} />
+      <Complete lessonId={lessonId} userId={userId} courseId={courseId} />
     </Box>
   );
 };

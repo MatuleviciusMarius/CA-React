@@ -4,7 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { AiHelpModel, getAiHelp, getLessonById } from "../../api/lessons";
 import { Lesson } from "../../types/lesson";
-import { LessonTitle, LessonContent, TaskContent } from "../../types/translations";
+import {
+  LessonTitle,
+  LessonContent,
+  TaskContent,
+} from "../../types/translations";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import styles from "./Main.module.scss";
 import { useUserData } from "../../hooks/useUserData";
@@ -34,7 +38,11 @@ export default function LessonPage() {
     setLesson(fetchedTask.data.task);
   };
 
-  const retrieveProgress = async (lessonId: string, lessonOrder: number, courseId: string) => {
+  const retrieveProgress = async (
+    lessonId: string,
+    lessonOrder: number,
+    courseId: string
+  ) => {
     const fetchedProgress = await createProgress({
       lessonId,
       lessonOrder,
@@ -51,7 +59,11 @@ export default function LessonPage() {
   }, []);
 
   useEffect(() => {
-    userInfo.id && id! && lesson?.orderId && lesson?.courseId && retrieveProgress(id!, lesson!.orderId, lesson!.courseId);
+    userInfo.id &&
+      id! &&
+      lesson?.orderId &&
+      lesson?.courseId &&
+      retrieveProgress(id!, lesson!.orderId, lesson!.courseId);
   }, [id, lesson?.orderId, lesson?.courseId]);
 
   const lessonTitleKey = `title_${activeLang}` as keyof LessonTitle;
@@ -90,7 +102,7 @@ export default function LessonPage() {
         hidden: true,
       },
     }),
-    [lesson],
+    [lesson]
   );
 
   return (
@@ -132,9 +144,23 @@ export default function LessonPage() {
           )}
         </Box>
         <AiResponseBox message={aiHelpMessage} />
-        {lesson && <UserActions isAiResponseLoading={isAiResponseLoading} lessonId={lesson.id} onAskAiHelp={onAskAiHelp} userId={userInfo.id} />}
+        {lesson && (
+          <UserActions
+            isAiResponseLoading={isAiResponseLoading}
+            lessonId={lesson.id}
+            onAskAiHelp={onAskAiHelp}
+            userId={userInfo.id}
+            courseId={lesson.courseId}
+          />
+        )}
         <SandpackEditor />
-        <Modal sx={{ minWidth: 380 }} open={isModalOpen} onClose={() => setModalOpen(false)} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        <Modal
+          sx={{ minWidth: 380 }}
+          open={isModalOpen}
+          onClose={() => setModalOpen(false)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
           <SuccessfullLesson atempts={6} setModalOpen={setModalOpen} />
         </Modal>
       </Box>

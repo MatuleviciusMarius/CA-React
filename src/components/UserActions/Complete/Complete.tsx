@@ -19,12 +19,14 @@ import { useEffect, useState } from "react";
 type CompleteProps = {
   userId: string;
   lessonId: string;
+  courseId: string;
 };
 
-const Complete = ({ lessonId, userId }: CompleteProps) => {
+const Complete = ({ lessonId, userId, courseId }: CompleteProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [testNames, setTestNames] = useState<string[]>([]);
-  const [completeResults, setCompleteResults] = useState<CompleteLessonResponse | null>(null)
+  const [completeResults, setCompleteResults] =
+    useState<CompleteLessonResponse | null>(null);
 
   const { t } = useTranslation();
   const code = useCurrentCode();
@@ -60,6 +62,8 @@ const Complete = ({ lessonId, userId }: CompleteProps) => {
     setIsModalOpen(true);
     const body: CompleteLessonModel = {
       userId,
+      lessonId,
+      courseId,
       code,
     };
 
@@ -83,21 +87,17 @@ const Complete = ({ lessonId, userId }: CompleteProps) => {
             Running tests:
           </Typography>
           <List>
-            {
-              completeResults ? (
-                completeResults.map((result, i) => (
+            {completeResults
+              ? completeResults.map((result, i) => (
                   <Typography key={i}>
-                    {result.result ? "✅" : "❌"} {result.name.en} 
+                    {result.result ? "✅" : "❌"} {result.name.en}
                   </Typography>
                 ))
-              ) : (
-                testNames?.map((name, i) => (
+              : testNames?.map((name, i) => (
                   <Typography key={i}>
                     <CircularProgress size={15} /> {name}
                   </Typography>
-                ))
-              )
-            }
+                ))}
           </List>
         </Box>
       </Modal>
