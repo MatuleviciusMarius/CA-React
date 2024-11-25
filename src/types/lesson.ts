@@ -21,7 +21,4 @@ export type Lesson = {
   isHtmlEditor: boolean;
   isCssEditor: boolean;
   isJsEditor: boolean;
-
-  // aiAssistsCount: number;
-  // submitsCount: number;
 };
