@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  List,
-  Modal,
-  Typography,
-} from "@mui/material";
+import { Button } from "@mui/material";
 import {
   completeLesson,
   CompleteLessonModel,
@@ -15,6 +8,7 @@ import {
 import { useCurrentCode } from "../../SandpackEditor/hooks/useCurrentCode";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
+import LessonSummaryModal from "../../Modal/LessonSummaryModal/LessonSummaryModal";
 
 type CompleteProps = {
   userId: string;
@@ -46,17 +40,6 @@ const Complete = ({ lessonId, userId, courseId }: CompleteProps) => {
     fetchTestNames();
   }, []);
 
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    boxShadow: 24,
-    p: 4,
-  };
-
   const handleComplete = async () => {
     setCompleteResults(null);
     setIsModalOpen(true);
@@ -76,31 +59,17 @@ const Complete = ({ lessonId, userId, courseId }: CompleteProps) => {
       <Button onClick={handleComplete} variant="contained" color="success">
         {t("complete")}
       </Button>
-      <Modal
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Running tests:
-          </Typography>
-          <List>
-            {completeResults
-              ? completeResults.map((result, i) => (
-                  <Typography key={i}>
-                    {result.result ? "✅" : "❌"} {result.name.en}
-                  </Typography>
-                ))
-              : testNames?.map((name, i) => (
-                  <Typography key={i}>
-                    <CircularProgress size={15} /> {name}
-                  </Typography>
-                ))}
-          </List>
-        </Box>
-      </Modal>
+
+      <LessonSummaryModal
+        atempts={3}
+        isOpen={isModalOpen}
+        setModalOpen={() => {
+          setIsModalOpen(false);
+          console.log("assdsdsd");
+        }}
+        testNames={testNames}
+        completeResults={completeResults}
+      />
     </>
   );
 };

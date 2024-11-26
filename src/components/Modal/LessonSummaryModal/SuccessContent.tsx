@@ -2,19 +2,16 @@ import { Button, Typography } from "@mui/material";
 import styles from "./styles.module.css";
 import { getStars } from "./stars";
 
-type SuccessfullLessonProp = {
+type SuccessContentProps = {
   atempts: number;
   setModalOpen: (status: boolean) => void;
 };
 
-const SuccessfullLesson = ({
-  setModalOpen,
-  atempts,
-}: SuccessfullLessonProp) => {
+const SuccessContent = ({ atempts, setModalOpen }: SuccessContentProps) => {
   const starts = getStars(atempts);
 
   return (
-    <div className={styles.wrapper}>
+    <div>
       <Typography
         id="simple-modal-title"
         variant="h6"
@@ -23,13 +20,11 @@ const SuccessfullLesson = ({
       >
         Great Job!
       </Typography>
-
       <div className={styles.starsWrapper}>
         {starts.map((star, idx) => (
           <img className={styles.star} src={star} key={idx} />
         ))}
       </div>
-
       <Typography
         id="simple-modal-description"
         sx={{ mt: 2 }}
@@ -58,4 +53,4 @@ const SuccessfullLesson = ({
   );
 };
 
-export default SuccessfullLesson;
+export default SuccessContent;

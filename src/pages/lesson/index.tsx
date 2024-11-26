@@ -9,13 +9,12 @@ import {
   LessonContent,
   TaskContent,
 } from "../../types/translations";
-import { Box, Button, Modal, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import styles from "./Main.module.scss";
 import { useUserData } from "../../hooks/useUserData";
 import { useActiveLanguage } from "../../hooks/useActiveLanguage";
 import AiResponseBox from "../../components/AiResponseBox/AiResponseBox";
 import UserActions from "../../components/UserActions/UserActions";
-import SuccessfullLesson from "../../components/Modal/SuccessfullLesson/SuccessfullLesson";
 import { createProgress } from "../../api/progress";
 import SandpackEditor from "../../components/SandpackEditor/SandpackEditor";
 import { SandpackProvider } from "@codesandbox/sandpack-react";
@@ -25,7 +24,6 @@ export default function LessonPage() {
   const [lesson, setLesson] = useState<Lesson>();
   const [aiHelpMessage, setAiHelpMessage] = useState("");
   const [isAiResponseLoading, setAiResponseLoading] = useState(false);
-  const [isModalOpen, setModalOpen] = useState(false);
 
   const { id } = useParams();
   const activeLang = useActiveLanguage();
@@ -154,15 +152,6 @@ export default function LessonPage() {
           />
         )}
         <SandpackEditor />
-        <Modal
-          sx={{ minWidth: 380 }}
-          open={isModalOpen}
-          onClose={() => setModalOpen(false)}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <SuccessfullLesson atempts={6} setModalOpen={setModalOpen} />
-        </Modal>
       </Box>
     </SandpackProvider>
   );
