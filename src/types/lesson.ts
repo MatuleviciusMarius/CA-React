@@ -1,5 +1,6 @@
 export type Lesson = {
   id: string;
+  nextLessonId: string;
   courseId: string;
   difficulty: string;
   answer: string;

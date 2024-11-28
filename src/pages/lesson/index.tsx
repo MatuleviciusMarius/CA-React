@@ -54,7 +54,7 @@ export default function LessonPage() {
 
   useEffect(() => {
     retrieveTask(id!);
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     userInfo.id &&
@@ -146,6 +146,7 @@ export default function LessonPage() {
           <UserActions
             isAiResponseLoading={isAiResponseLoading}
             lessonId={lesson.id}
+            nextLessonId={lesson.nextLessonId}
             onAskAiHelp={onAskAiHelp}
             userId={userInfo.id}
             courseId={lesson.courseId}

@@ -10,6 +10,7 @@ type AIHelpProps = {
   userId: string;
   lessonId: string;
   courseId: string;
+  nextLessonId: string;
 };
 
 const UserActions = ({
@@ -17,6 +18,7 @@ const UserActions = ({
   userId,
   lessonId,
   courseId,
+  nextLessonId,
   onAskAiHelp,
 }: AIHelpProps) => {
   const { t } = useTranslation();
@@ -42,7 +44,12 @@ const UserActions = ({
           <>{t("aiHelp")}</>
         )}
       </Button>
-      <Complete lessonId={lessonId} userId={userId} courseId={courseId} />
+      <Complete
+        lessonId={lessonId}
+        userId={userId}
+        courseId={courseId}
+        nextLessonId={nextLessonId}
+      />
     </Box>
   );
 };

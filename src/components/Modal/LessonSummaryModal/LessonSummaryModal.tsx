@@ -1,8 +1,9 @@
-import { Modal } from "@mui/material";
+import { Button, Modal } from "@mui/material";
 import styles from "./styles.module.css";
 import { CompleteLessonResponse } from "../../../api/lessons";
 import SuccessContent from "./SuccessContent";
 import TestCheks from "../../TestCheks/TestCheks";
+import { useNavigate } from "react-router";
 
 type SuccessfullLessonProp = {
   atempts: number;
@@ -10,6 +11,7 @@ type SuccessfullLessonProp = {
   isOpen: boolean;
   testNames: string[];
   completeResults: CompleteLessonResponse | null;
+  nextLessonLink: string;
 };
 
 const SuccessfullLesson = ({
@@ -18,8 +20,9 @@ const SuccessfullLesson = ({
   isOpen,
   completeResults,
   testNames,
+  nextLessonLink,
 }: SuccessfullLessonProp) => {
-  console.log("completeResults", completeResults);
+  const navigate = useNavigate();
 
   const isEveryTestPassed = completeResults?.every((c) => c.result);
 
@@ -36,6 +39,29 @@ const SuccessfullLesson = ({
         {isEveryTestPassed && (
           <SuccessContent setModalOpen={setModalOpen} atempts={atempts} />
         )}
+
+        <div className={styles.buttonWrapper}>
+          <Button
+            variant="contained"
+            onClick={() => setModalOpen(false)}
+            sx={{ mt: 2 }}
+          >
+            Close
+          </Button>
+          {isEveryTestPassed && (
+            <Button
+              color="success"
+              variant="contained"
+              onClick={() => {
+                setModalOpen(false);
+                navigate(nextLessonLink);
+              }}
+              sx={{ mt: 2 }}
+            >
+              Continue
+            </Button>
+          )}
+        </div>
       </div>
     </Modal>
   );

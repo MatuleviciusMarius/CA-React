@@ -14,9 +14,15 @@ type CompleteProps = {
   userId: string;
   lessonId: string;
   courseId: string;
+  nextLessonId: string;
 };
 
-const Complete = ({ lessonId, userId, courseId }: CompleteProps) => {
+const Complete = ({
+  lessonId,
+  userId,
+  courseId,
+  nextLessonId,
+}: CompleteProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [testNames, setTestNames] = useState<string[]>([]);
   const [completeResults, setCompleteResults] =
@@ -28,8 +34,6 @@ const Complete = ({ lessonId, userId, courseId }: CompleteProps) => {
   const fetchTestNames = async () => {
     try {
       const res = await getTestNames(lessonId);
-      console.log(res.data);
-
       setTestNames(res.data.map((test) => test.en));
     } catch (err) {
       console.log(err);
@@ -62,10 +66,10 @@ const Complete = ({ lessonId, userId, courseId }: CompleteProps) => {
 
       <LessonSummaryModal
         atempts={3}
+        nextLessonLink={`/lesson/${nextLessonId}`}
         isOpen={isModalOpen}
         setModalOpen={() => {
           setIsModalOpen(false);
-          console.log("assdsdsd");
         }}
         testNames={testNames}
         completeResults={completeResults}

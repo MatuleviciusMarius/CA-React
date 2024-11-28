@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import styles from "./styles.module.css";
 import { getStars } from "./stars";
 
@@ -7,7 +7,7 @@ type SuccessContentProps = {
   setModalOpen: (status: boolean) => void;
 };
 
-const SuccessContent = ({ atempts, setModalOpen }: SuccessContentProps) => {
+const SuccessContent = ({ atempts }: SuccessContentProps) => {
   const starts = getStars(atempts);
 
   return (
@@ -32,23 +32,6 @@ const SuccessContent = ({ atempts, setModalOpen }: SuccessContentProps) => {
       >
         This is a simple modal example.
       </Typography>
-      <div className={styles.buttonWrapper}>
-        <Button
-          variant="contained"
-          onClick={() => setModalOpen(false)}
-          sx={{ mt: 2 }}
-        >
-          Close
-        </Button>
-        <Button
-          color="success"
-          variant="contained"
-          onClick={() => setModalOpen(false)}
-          sx={{ mt: 2 }}
-        >
-          Continue
-        </Button>
-      </div>
     </div>
   );
 };
