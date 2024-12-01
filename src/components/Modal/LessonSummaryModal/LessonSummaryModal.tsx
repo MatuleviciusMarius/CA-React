@@ -6,21 +6,25 @@ import TestCheks from "../../TestCheks/TestCheks";
 import { useNavigate } from "react-router";
 
 type SuccessfullLessonProp = {
-  atempts: number;
   setModalOpen: (status: boolean) => void;
   isOpen: boolean;
   testNames: string[];
   completeResults: CompleteLessonResponse | null;
   nextLessonLink: string;
+  userId: string;
+  lessonId: string;
+  courseId: string;
 };
 
 const SuccessfullLesson = ({
   setModalOpen,
-  atempts,
   isOpen,
   completeResults,
   testNames,
   nextLessonLink,
+  userId,
+  lessonId,
+  courseId,
 }: SuccessfullLessonProp) => {
   const navigate = useNavigate();
 
@@ -37,7 +41,11 @@ const SuccessfullLesson = ({
         <TestCheks completeResults={completeResults} testNames={testNames} />
 
         {isEveryTestPassed && (
-          <SuccessContent setModalOpen={setModalOpen} atempts={atempts} />
+          <SuccessContent
+            userId={userId}
+            lessonId={lessonId}
+            courseId={courseId}
+          />
         )}
 
         <div className={styles.buttonWrapper}>

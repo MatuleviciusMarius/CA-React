@@ -65,7 +65,6 @@ const Complete = ({
       </Button>
 
       <LessonSummaryModal
-        atempts={3}
         nextLessonLink={`/lesson/${nextLessonId}`}
         isOpen={isModalOpen}
         setModalOpen={() => {
@@ -73,6 +72,9 @@ const Complete = ({
         }}
         testNames={testNames}
         completeResults={completeResults}
+        userId={userId}
+        lessonId={lessonId}
+        courseId={courseId}
       />
     </>
   );

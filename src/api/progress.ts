@@ -6,6 +6,12 @@ type ProgressMutationBody = {
   courseId: string;
 };
 
+type ProgressQuery = {
+  lessonId: string;
+  userId: string;
+  courseId: string;
+};
+
 export const createProgress = async ({
   lessonId,
   lessonOrder,
@@ -18,6 +24,17 @@ export const createProgress = async ({
   };
 
   const response = await baseApi.post(`/progress`, progressBody);
+  return response;
+};
+
+export const getProgress = async ({
+  lessonId,
+  userId,
+  courseId,
+}: ProgressQuery) => {
+  const response = await baseApi.get(
+    `/progress/${courseId}/${userId}/${lessonId}`
+  );
   return response;
 };
 
