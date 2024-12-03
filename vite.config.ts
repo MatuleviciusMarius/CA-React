@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@router": "/src/router",
+      extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json"],
     },
   },
 });

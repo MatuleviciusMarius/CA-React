@@ -6,9 +6,6 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "baseUrl": "./",
-    "paths": {
-      "@router/*": ["src/router/*"]
-    },
 
     /* Bundler mode */
     "moduleResolution": "node",
