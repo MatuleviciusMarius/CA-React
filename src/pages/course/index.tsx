@@ -67,7 +67,7 @@ export default function LoginPage() {
           <p className={styles.description}>{course?.description}</p>
           <div className={styles.skillsWrapper}>
             {course?.skills.map((skill) => (
-              <Skill title={skill} />
+              <Skill key={skill} title={skill} />
             ))}
           </div>
           <img className={styles.cover} src={course?.imgUrl} />

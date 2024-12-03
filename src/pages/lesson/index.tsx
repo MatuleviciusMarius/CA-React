@@ -24,6 +24,7 @@ export default function LessonPage() {
   const [lesson, setLesson] = useState<Lesson>();
   const [aiHelpMessage, setAiHelpMessage] = useState("");
   const [isAiResponseLoading, setAiResponseLoading] = useState(false);
+  const [currentProgress, setCurrentProgress] = useState<number | null>(null);
 
   const { id } = useParams();
   const activeLang = useActiveLanguage();
@@ -57,11 +58,16 @@ export default function LessonPage() {
   }, [id]);
 
   useEffect(() => {
-    userInfo.id &&
+    if (
+      userInfo.id &&
       id! &&
       lesson?.orderId &&
-      lesson?.courseId &&
+      currentProgress !== lesson?.orderId &&
+      lesson?.courseId
+    ) {
+      setCurrentProgress(lesson?.orderId);
       retrieveProgress(id!, lesson!.orderId, lesson!.courseId);
+    }
   }, [id, lesson?.orderId, lesson?.courseId]);
 
   const lessonTitleKey = `title_${activeLang}` as keyof LessonTitle;
