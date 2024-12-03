@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import "./App.scss";
-import Router from "./router/index";
+import Router from "./router/index.tsx";
 import { useTranslation } from "react-i18next";
 import { SupportedLanguageKeys, supportedLanguages } from "../i18n";
 
