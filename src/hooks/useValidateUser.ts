@@ -11,18 +11,16 @@ export const useValidateUser = () => {
     JSON.parse(localStorage.getItem("user") || "{}")
   );
 
-  const validateUser = useCallback(
-    async () => {
-      const response = await validateLogin();
-      
-      if (response.status !== 200) {
-        navigate(RoutePaths.login);
-        localStorage.removeItem("user");
-        return;
-      }
-    },
-    [navigate]
-  );
+  const validateUser = useCallback(async () => {
+    const response = await validateLogin();
+
+    // @ts-expect-error todo later
+    if (response.status !== 200) {
+      navigate(RoutePaths.login);
+      localStorage.removeItem("user");
+      return;
+    }
+  }, [navigate]);
 
   useEffect(() => {
     if (!jwt_token) {

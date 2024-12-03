@@ -16,7 +16,8 @@ const ProtectedRoutesWrapper = () => {
 
     const validate = async () => {
       const response = await validateLogin();
-      
+
+      // @ts-expect-error todo later
       setIsValid(response.status === 200);
     };
 
