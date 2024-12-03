@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import "./App.scss";
-import Router from "./router";
+import Router from "./router/index";
 import { useTranslation } from "react-i18next";
 import { SupportedLanguageKeys, supportedLanguages } from "../i18n";
 
@@ -10,11 +10,18 @@ function App() {
   useEffect(() => {
     const storedLang = localStorage.getItem("language");
 
-    if (storedLang && Object.values(supportedLanguages).includes(storedLang as SupportedLanguageKeys)) {
+    if (
+      storedLang &&
+      Object.values(supportedLanguages).includes(
+        storedLang as SupportedLanguageKeys
+      )
+    ) {
       i18n.changeLanguage(storedLang);
     } else {
       const browserLang = navigator.language.split("-")[0];
-      const isSupported = Object.values(supportedLanguages).includes(browserLang as SupportedLanguageKeys);
+      const isSupported = Object.values(supportedLanguages).includes(
+        browserLang as SupportedLanguageKeys
+      );
       const selectedLang = isSupported ? browserLang : "en";
 
       i18n.changeLanguage(selectedLang);
