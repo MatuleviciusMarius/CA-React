@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const API_ENDPOINT = import.meta.env.VITE_SECRET_KEY;
+const API_ENDPOINT = import.meta.env.VITE_BACKEND_LINK_URL;
 
 const baseApi = axios.create({
   baseURL: API_ENDPOINT,
