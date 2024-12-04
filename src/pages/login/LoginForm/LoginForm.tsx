@@ -6,8 +6,8 @@ import { useTranslation } from "react-i18next";
 import { login } from "../../../api/login";
 import { UserLogin } from "../../../types/user";
 import { useNavigate } from "react-router-dom";
+import { RoutePaths } from "../../../router/routes.ts";
 import { useState } from "react";
-import { RoutePaths } from "src/router/routes";
 
 export default function LoginForm() {
   const navigate = useNavigate();
