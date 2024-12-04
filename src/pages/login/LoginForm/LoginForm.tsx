@@ -6,9 +6,8 @@ import { useTranslation } from "react-i18next";
 import { login } from "../../../api/login";
 import { UserLogin } from "../../../types/user";
 import { useNavigate } from "react-router-dom";
-import { RoutePaths } from "../../../router/routes";
+import { RoutePaths } from "../../../router/routes.ts";
 import { useState } from "react";
-// import logo from "../../../assets/photos/logo.svg";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -29,7 +28,7 @@ export default function LoginForm() {
       if (response.status === 401) {
         setErrorMessage("Inserted bad email or password");
       }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       if (e.response.status === 401) {
         setErrorMessage("Inserted bad email or password");
@@ -38,7 +37,13 @@ export default function LoginForm() {
   }
 
   return (
-    <Box display={"flex"} alignItems={"center"} justifyContent={"center"} flexDirection={"column"} width={"100%"}>
+    <Box
+      display={"flex"}
+      alignItems={"center"}
+      justifyContent={"center"}
+      flexDirection={"column"}
+      width={"100%"}
+    >
       {/* <img className={styles.logo} src={logo} /> */}
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <h3 className={styles.title}>Log In</h3>
@@ -55,7 +60,13 @@ export default function LoginForm() {
             },
           })}
         />
-        <TextField size="medium" label={t("password")} id="password" type="password" {...register("password")} />
+        <TextField
+          size="medium"
+          label={t("password")}
+          id="password"
+          type="password"
+          {...register("password")}
+        />
         {errorMessage && <p className={styles.error}>{errorMessage}</p>}
 
         <Button variant="contained" type="submit">

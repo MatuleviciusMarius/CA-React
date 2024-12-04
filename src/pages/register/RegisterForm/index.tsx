@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { registerUser } from "../../../api/register";
 import { UserRegistration } from "../../../types/user";
 import { useNavigate } from "react-router-dom";
-import { RoutePaths } from "../../../router/routes";
+import { RoutePaths } from "../../../router/routes.ts";
 import { useState } from "react";
 import ErrorParser from "../../../components/ErrorParser/ErrorParser";
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./styles.module.css";
 import { logout } from "../../helpers/login";
 import { useNavigate } from "react-router-dom";
-import { RoutePaths } from "../../router/routes";
+import { RoutePaths } from "../../router/routes.ts";
 import { useTranslation } from "react-i18next";
 
 type UserAvatarProps = {

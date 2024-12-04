@@ -2,7 +2,7 @@ import cookie from "js-cookie";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { validateLogin } from "../api/login";
-import { RoutePaths } from "../router/routes";
+import { RoutePaths } from "../router/routes.ts";
 
 export const useValidateUser = () => {
   const navigate = useNavigate();
