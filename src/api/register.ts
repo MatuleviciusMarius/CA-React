@@ -9,5 +9,6 @@ export type RegisterResponse = {
 
 export const registerUser = async (user: UserRegistration) => {
   const response = await baseApi.post<RegisterResponse>("/users", user);
+  localStorage.setItem("user", JSON.stringify(response.data.user));
   return response;
 };
