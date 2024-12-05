@@ -14,7 +14,7 @@ export type UserRegistration = Omit<
   "courseProgress" | "certificateURLs"
 > & {
   occupation: string;
-  phoneNumber: string;
+  // phoneNumber: string;
   password: string;
   dateOfBirth: Date;
 };

@@ -16,7 +16,7 @@ type FormData = {
   email: string;
   country: string;
   occupation: string;
-  phoneNumber: string;
+  // phoneNumber: string;
   password: string;
   confirmPassword: string;
   dateOfBirth: Date;
@@ -45,7 +45,7 @@ export default function LoginForm() {
         email: data.email,
         occupation: data.occupation,
         country: data.country,
-        phoneNumber: data.phoneNumber,
+        // phoneNumber: data.phoneNumber,
         password: data.password,
         dateOfBirth: data.dateOfBirth,
       };
@@ -138,13 +138,13 @@ export default function LoginForm() {
             },
           })}
         />
-        <TextField
+        {/* <TextField
           size="medium"
           label={t("phoneNumber")}
           id="phoneNumber"
           type="number"
           {...register("phoneNumber")}
-        />
+        /> */}
         <TextField
           size="medium"
           label={t("password")}
