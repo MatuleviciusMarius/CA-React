@@ -4,11 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { AiHelpModel, getAiHelp, getLessonById } from "../../api/lessons";
 import { Lesson } from "../../types/lesson";
-import {
-  LessonTitle,
-  LessonContent,
-  TaskContent,
-} from "../../types/translations";
+import { LessonTitle, LessonContent, TaskContent } from "../../types/translations";
 import { Box, Button, Typography } from "@mui/material";
 import styles from "./Main.module.scss";
 import { useUserData } from "../../hooks/useUserData";
@@ -19,6 +15,7 @@ import { createProgress } from "../../api/progress";
 import SandpackEditor from "../../components/SandpackEditor/SandpackEditor";
 import { SandpackProvider } from "@codesandbox/sandpack-react";
 import { Code } from "../../components/SandpackEditor/hooks/useCurrentCode";
+import { RoutePaths } from "../../router/routes";
 
 export default function LessonPage() {
   const [lesson, setLesson] = useState<Lesson>();
@@ -37,11 +34,7 @@ export default function LessonPage() {
     setLesson(fetchedTask.data.task);
   };
 
-  const retrieveProgress = async (
-    lessonId: string,
-    lessonOrder: number,
-    courseId: string
-  ) => {
+  const retrieveProgress = async (lessonId: string, lessonOrder: number, courseId: string) => {
     const fetchedProgress = await createProgress({
       lessonId,
       lessonOrder,
@@ -58,13 +51,7 @@ export default function LessonPage() {
   }, [id]);
 
   useEffect(() => {
-    if (
-      userInfo.id &&
-      id! &&
-      lesson?.orderId &&
-      currentProgress !== lesson?.orderId &&
-      lesson?.courseId
-    ) {
+    if (userInfo.id && id! && lesson?.orderId && currentProgress !== lesson?.orderId && lesson?.courseId) {
       setCurrentProgress(lesson?.orderId);
       retrieveProgress(id!, lesson!.orderId, lesson!.courseId);
     }
@@ -120,7 +107,8 @@ export default function LessonPage() {
     >
       <Box minHeight={"100vh"}>
         <Header isUserLoggedIn={!!userInfo.email} name={userInfo.name} />
-        <Button variant="outlined" onClick={() => navigate(-1)}>
+        {/* Temps fix needs to be replaced with proper routing */}
+        <Button variant="outlined" onClick={() => navigate("/course/html_css")}>
           {"back"}
         </Button>
         <Box height={"100%"} padding={3} className={styles.taskDescription}>
