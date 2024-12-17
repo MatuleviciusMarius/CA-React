@@ -15,7 +15,6 @@ import { createProgress } from "../../api/progress";
 import SandpackEditor from "../../components/SandpackEditor/SandpackEditor";
 import { SandpackProvider } from "@codesandbox/sandpack-react";
 import { Code } from "../../components/SandpackEditor/hooks/useCurrentCode";
-import { RoutePaths } from "../../router/routes";
 
 export default function LessonPage() {
   const [lesson, setLesson] = useState<Lesson>();
@@ -93,7 +92,7 @@ export default function LessonPage() {
         hidden: true,
       },
     }),
-    [lesson]
+    [lesson],
   );
 
   return (
@@ -136,16 +135,7 @@ export default function LessonPage() {
           )}
         </Box>
         <AiResponseBox message={aiHelpMessage} />
-        {lesson && (
-          <UserActions
-            isAiResponseLoading={isAiResponseLoading}
-            lessonId={lesson.id}
-            nextLessonId={lesson.nextLessonId}
-            onAskAiHelp={onAskAiHelp}
-            userId={userInfo.id}
-            courseId={lesson.courseId}
-          />
-        )}
+        {lesson && <UserActions isAiResponseLoading={isAiResponseLoading} lessonId={lesson.id} nextLessonId={lesson.nextLessonId} onAskAiHelp={onAskAiHelp} userId={userInfo.id} courseId={lesson.courseId} />}
         <SandpackEditor />
       </Box>
     </SandpackProvider>

@@ -5,4 +5,5 @@ export const RoutePaths = {
   course: "/course/:id",
   task: "/lesson/:id",
   notFound: "*",
+  settings: "/settings",
 };

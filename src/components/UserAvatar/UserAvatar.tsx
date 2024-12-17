@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
 import { logout } from "../../helpers/login";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RoutePaths } from "../../router/routes.ts";
 import { useTranslation } from "react-i18next";
 
@@ -28,7 +28,7 @@ const UserAvatar = ({ name }: UserAvatarProps) => {
 
       {isShowModal && (
         <div className={styles.modal}>
-          <div>{name}</div>
+          <Link to={RoutePaths.settings}>{name}</Link>
           <button
             onClick={() => {
               logout();
