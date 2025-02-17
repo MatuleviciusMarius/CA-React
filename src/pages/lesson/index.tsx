@@ -123,7 +123,10 @@ export default function LessonPage() {
       <Box minHeight={"100vh"}>
         <Header isUserLoggedIn={!!userInfo.email} name={userInfo.name} />
         {/* Temps fix needs to be replaced with proper routing */}
-        <Button variant="outlined" onClick={() => navigate("/course/html_css")}>
+        <Button
+          variant="outlined"
+          onClick={() => navigate(`/course/${lesson?.courseId}`)}
+        >
           {t("back")}
         </Button>
         <Box height={"100%"} padding={3} className={styles.taskDescription}>
@@ -164,6 +167,7 @@ export default function LessonPage() {
             onAskAiHelp={onAskAiHelp}
             userId={userInfo.id}
             courseId={lesson.courseId}
+            isFinalLesson={lesson.isFinal}
           />
         )}
         <SandpackEditor />

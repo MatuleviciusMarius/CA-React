@@ -6,4 +6,5 @@ export const RoutePaths = {
   task: "/lesson/:id",
   notFound: "*",
   settings: "/settings",
+  final: "/final/:id",
 };

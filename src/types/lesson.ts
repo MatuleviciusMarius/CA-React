@@ -22,4 +22,5 @@ export type Lesson = {
   isHtmlEditor: boolean;
   isCssEditor: boolean;
   isJsEditor: boolean;
+  isFinal: boolean;
 };

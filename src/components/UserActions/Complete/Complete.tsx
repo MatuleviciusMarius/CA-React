@@ -15,6 +15,7 @@ type CompleteProps = {
   lessonId: string;
   courseId: string;
   nextLessonId: string;
+  isFinalLesson: boolean;
 };
 
 const Complete = ({
@@ -22,6 +23,7 @@ const Complete = ({
   userId,
   courseId,
   nextLessonId,
+  isFinalLesson,
 }: CompleteProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [testNames, setTestNames] = useState<string[]>([]);
@@ -58,6 +60,10 @@ const Complete = ({
     setCompleteResults(res.data);
   };
 
+  const finalLink = `/final/${courseId}`;
+
+  const nextTaskLink = `/lesson/${nextLessonId}`;
+
   return (
     <>
       <Button onClick={handleComplete} variant="contained" color="success">
@@ -65,7 +71,7 @@ const Complete = ({
       </Button>
 
       <LessonSummaryModal
-        nextLessonLink={`/lesson/${nextLessonId}`}
+        nextLessonLink={`${isFinalLesson ? finalLink : nextTaskLink}`}
         isOpen={isModalOpen}
         setModalOpen={() => {
           setIsModalOpen(false);

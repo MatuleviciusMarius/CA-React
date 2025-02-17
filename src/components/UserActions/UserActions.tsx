@@ -11,6 +11,7 @@ type AIHelpProps = {
   lessonId: string;
   courseId: string;
   nextLessonId: string;
+  isFinalLesson: boolean;
 };
 
 const UserActions = ({
@@ -20,6 +21,7 @@ const UserActions = ({
   courseId,
   nextLessonId,
   onAskAiHelp,
+  isFinalLesson,
 }: AIHelpProps) => {
   const { t } = useTranslation();
 
@@ -49,6 +51,7 @@ const UserActions = ({
         userId={userId}
         courseId={courseId}
         nextLessonId={nextLessonId}
+        isFinalLesson={isFinalLesson}
       />
     </Box>
   );

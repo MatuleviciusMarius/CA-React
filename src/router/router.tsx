@@ -8,6 +8,7 @@ import Course from "../pages/course/index.tsx";
 import Lesson from "../pages/lesson/index.tsx";
 import ProtectedRoutesWrapper from "./ProtectedRoutesWrapper/ProtectedRoutesWrapper.tsx";
 import Settings from "../pages/settings/index.tsx";
+import Final from "../pages/final/index.tsx";
 
 export default function Router() {
   return (
@@ -20,6 +21,7 @@ export default function Router() {
         <Route path={RoutePaths.course} element={<Course />} />
         <Route path={RoutePaths.task} element={<Lesson />} />
         <Route path={RoutePaths.settings} element={<Settings />} />
+        <Route path={RoutePaths.final} element={<Final />} />
       </Route>
     </Routes>
   );
