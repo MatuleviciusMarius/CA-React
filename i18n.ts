@@ -45,6 +45,8 @@ const resources = {
       phoneNumber_missing: "Phone number is missing",
       sign_out: "Sign Out",
       task: "Task",
+      course_completed: "You have finished course successfully",
+      back_to_couses: "Back to courses",
     },
   },
 
@@ -74,6 +76,8 @@ const resources = {
       phoneNumber_missing: "Įrašykite savo telefono numerį",
       sign_out: "Atsijungti",
       task: "Užduotis",
+      course_completed: "Pabaigei kursą sėkmingai",
+      back_to_couses: "Grįžt į kursus",
     },
   },
 };

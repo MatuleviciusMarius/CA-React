@@ -12,6 +12,11 @@ type ProgressQuery = {
   courseId: string;
 };
 
+type ProgressFinishQuery = {
+  userId: string;
+  courseId: string;
+};
+
 export const createProgress = async ({
   lessonId,
   lessonOrder,
@@ -36,6 +41,22 @@ export const getProgress = async ({
     `/progress/${courseId}/${userId}/${lessonId}`
   );
   return response;
+};
+
+export const getIsCourseFinished = async ({
+  userId,
+  courseId,
+}: ProgressFinishQuery) => {
+  try {
+    const response = await baseApi.get(
+      `/progress/course/status/${courseId}/${userId}`
+    );
+    return response;
+  } catch (err) {
+    console.log(err);
+    // @ts-expect-error i am too lazy
+    return err.response.data.isFinished;
+  }
 };
 
 type ProgressQueryBody = {
