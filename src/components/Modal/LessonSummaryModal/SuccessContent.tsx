@@ -10,11 +10,7 @@ type SuccessContentProps = {
   courseId: string;
 };
 
-const SuccessContent = ({
-  lessonId,
-  userId,
-  courseId,
-}: SuccessContentProps) => {
+const SuccessContent = ({ lessonId, userId, courseId }: SuccessContentProps) => {
   const [atempts, setAttempts] = useState(null);
 
   const starts = getStars(atempts);
@@ -25,7 +21,6 @@ const SuccessContent = ({
       userId,
       courseId,
     });
-    console.log("fetchedProgress", fetchedProgress.data.progress);
     setAttempts(fetchedProgress.data.progress.attemptsCount);
   };
 
@@ -37,12 +32,7 @@ const SuccessContent = ({
     <div>
       {starts && (
         <>
-          <Typography
-            id="simple-modal-title"
-            variant="h6"
-            component="h1"
-            textAlign="center"
-          >
+          <Typography id="simple-modal-title" variant="h6" component="h1" textAlign="center">
             Great Job!
           </Typography>
           <div className={styles.starsWrapper}>
@@ -50,11 +40,7 @@ const SuccessContent = ({
               <img className={styles.star} src={star} key={idx} />
             ))}
           </div>
-          <Typography
-            id="simple-modal-description"
-            sx={{ mt: 2 }}
-            textAlign="center"
-          >
+          <Typography id="simple-modal-description" sx={{ mt: 2 }} textAlign="center">
             This is a simple modal example.
           </Typography>
         </>
